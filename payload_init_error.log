@@ -1,0 +1,28 @@
+npm warn Unknown project config "enable-pre-post-scripts". This will stop working in the next major version of npm.
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+Initializing Payload...
+[12:16:47] [31mERROR[39m: [36mError: cannot connect to Postgres. Details: Tenant or user not found[39m
+    err: {
+      "type": "DatabaseError",
+      "message": "Tenant or user not found",
+      "stack":
+          error: Tenant or user not found
+              at C:\Users\hanie\Searches\OneDrive\Documentos\ANTIGRAVITY\sitesespeciais.com.br\SITESESPECIAIS.COM.BR\node_modules\.pnpm\pg-pool@3.12.0_pg@8.16.3\node_modules\pg-pool\index.js:45:11
+              at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+              at async connectWithReconnect (C:\Users\hanie\Searches\OneDrive\Documentos\ANTIGRAVITY\sitesespeciais.com.br\SITESESPECIAIS.COM.BR\node_modules\.pnpm\@payloadcms+db-postgres@3.7_e5b20e05a79bd056a3dfbbb9a5fcdb9c\node_modules\@payloadcms\db-postgres\src\connect.ts:22:14)
+              at async Object.connect (C:\Users\hanie\Searches\OneDrive\Documentos\ANTIGRAVITY\sitesespeciais.com.br\SITESESPECIAIS.COM.BR\node_modules\.pnpm\@payloadcms+db-postgres@3.7_e5b20e05a79bd056a3dfbbb9a5fcdb9c\node_modules\@payloadcms\db-postgres\src\connect.ts:58:7)
+              at async BasePayload.init (C:\Users\hanie\Searches\OneDrive\Documentos\ANTIGRAVITY\sitesespeciais.com.br\SITESESPECIAIS.COM.BR\node_modules\.pnpm\payload@3.78.0_graphql@16.13.0_typescript@5.7.3\node_modules\payload\src\index.ts:891:7)
+              at async getPayload (C:\Users\hanie\Searches\OneDrive\Documentos\ANTIGRAVITY\sitesespeciais.com.br\SITESESPECIAIS.COM.BR\node_modules\.pnpm\payload@3.78.0_graphql@16.13.0_typescript@5.7.3\node_modules\payload\src\index.ts:1198:22)
+              at async test (file:///C:/Users/hanie/Searches/OneDrive/Documentos/ANTIGRAVITY/sitesespeciais.com.br/SITESESPECIAIS.COM.BR/test-payload.js:11:21)
+      "length": 52,
+      "name": "error",
+      "severity": "FATAL",
+      "code": "XX000"
+    }
+PAYLOAD INIT ERROR: {
+  "stack": "Error: Error: cannot connect to Postgres: Tenant or user not found\n    at Object.connect (C:\\Users\\hanie\\Searches\\OneDrive\\Documentos\\ANTIGRAVITY\\sitesespeciais.com.br\\SITESESPECIAIS.COM.BR\\node_modules\\.pnpm\\@payloadcms+db-postgres@3.7_e5b20e05a79bd056a3dfbbb9a5fcdb9c\\node_modules\\@payloadcms\\db-postgres\\src\\connect.ts:111:11)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BasePayload.init (C:\\Users\\hanie\\Searches\\OneDrive\\Documentos\\ANTIGRAVITY\\sitesespeciais.com.br\\SITESESPECIAIS.COM.BR\\node_modules\\.pnpm\\payload@3.78.0_graphql@16.13.0_typescript@5.7.3\\node_modules\\payload\\src\\index.ts:891:7)\n    at async getPayload (C:\\Users\\hanie\\Searches\\OneDrive\\Documentos\\ANTIGRAVITY\\sitesespeciais.com.br\\SITESESPECIAIS.COM.BR\\node_modules\\.pnpm\\payload@3.78.0_graphql@16.13.0_typescript@5.7.3\\node_modules\\payload\\src\\index.ts:1198:22)\n    at async test (file:///C:/Users/hanie/Searches/OneDrive/Documentos/ANTIGRAVITY/sitesespeciais.com.br/SITESESPECIAIS.COM.BR/test-payload.js:11:21)",
+  "message": "Error: cannot connect to Postgres: Tenant or user not found",
+  "payloadInitError": true
+}

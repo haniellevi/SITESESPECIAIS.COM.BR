@@ -1,0 +1,4 @@
+Testing: postgresql://postgres.wawrkbivzguewgkrdigq:***@aws-0-sa-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true
+ FAILED: Tenant or user not found
+Testing: postgresql://postgres:***@[2600:1f1e:75b:4b0d:be3a:66e2:9f6b:3824]:5432/postgres
+ FAILED: connect ENETUNREACH 2600:1f1e:75b:4b0d:be3a:66e2:9f6b:3824:5432

@@ -1,0 +1,2 @@
+Testing: postgresql://postgres.wawrkbivzguewgkrdigq:***@aws-1-sa-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true
+ FAILED: password authentication failed for user "postgres"

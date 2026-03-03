@@ -1,0 +1,14 @@
+Testing: postgresql://postgres.wawrkbivzguewgkrdigq:***@aws-1-sa-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true
+ SUCCESS!
+--- THIS ONE WORKS ---
+postgresql://postgres.wawrkbivzguewgkrdigq:texugo12Texugo@aws-1-sa-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true
+Testing: postgresql://postgres:***@aws-1-sa-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true
+ FAILED: Tenant or user not found
+Testing: postgresql://postgres.wawrkbivzguewgkrdigq:***@aws-1-sa-east-1.pooler.supabase.com:5432/postgres?pgbouncer=true
+ SUCCESS!
+--- THIS ONE WORKS ---
+postgresql://postgres.wawrkbivzguewgkrdigq:texugo12Texugo@aws-1-sa-east-1.pooler.supabase.com:5432/postgres?pgbouncer=true
+Testing: postgresql://postgres:***@aws-1-sa-east-1.pooler.supabase.com:5432/postgres?pgbouncer=true
+ FAILED: Tenant or user not found
+Testing: postgresql://postgres:***@db.wawrkbivzguewgkrdigq.supabase.co:5432/postgres
+ FAILED: getaddrinfo ENOTFOUND db.wawrkbivzguewgkrdigq.supabase.co
