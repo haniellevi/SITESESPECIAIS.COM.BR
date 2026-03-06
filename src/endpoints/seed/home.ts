@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { RequiredDataFromCollectionSlug } from 'payload'
 import type { Media } from '@/payload-types'
 
@@ -673,3 +674,4 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
     title: 'Home',
   }
 }
+

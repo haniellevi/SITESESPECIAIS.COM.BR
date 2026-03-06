@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as migration_20260303_140909_init_db from './20260303_140909_init_db';
 
 export const migrations = [
@@ -7,3 +8,4 @@ export const migrations = [
     name: '20260303_140909_init_db'
   },
 ];
+

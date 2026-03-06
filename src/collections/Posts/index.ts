@@ -34,7 +34,7 @@ export const Posts: CollectionConfig<'posts'> = {
   access: {
     create: tenantAccess,
     delete: tenantAccess,
-    read: tenantAccess,
+    read: authenticatedOrPublished,
     update: tenantAccess,
   },
   // This config controls what's populated by default when a post is referenced

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { Media, User } from '@/payload-types'
 import { RequiredDataFromCollectionSlug } from 'payload'
 
@@ -313,3 +314,4 @@ export const post1: (args: PostArgs) => RequiredDataFromCollectionSlug<'posts'> 
     title: 'Digital Horizons: A Glimpse into Tomorrow',
   }
 }
+

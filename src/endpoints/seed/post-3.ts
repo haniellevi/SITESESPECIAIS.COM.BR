@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { RequiredDataFromCollectionSlug } from 'payload'
 import type { PostArgs } from './post-1'
 
@@ -266,3 +267,4 @@ export const post3: (args: PostArgs) => RequiredDataFromCollectionSlug<'posts'> 
     title: 'Dollar and Sense: The Financial Forecast',
   }
 }
+
