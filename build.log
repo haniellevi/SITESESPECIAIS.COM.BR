@@ -1,0 +1,67 @@
+npm warn Unknown project config "enable-pre-post-scripts". This will stop working in the next major version of npm.
+
+> build
+> cross-env NODE_OPTIONS=--no-deprecation next build
+
+ ⚠ Warning: Found multiple lockfiles. Selecting C:\Users\hanie\package-lock.json.
+   Consider removing the lockfiles at:
+   * C:\Users\hanie\Searches\OneDrive\Documentos\ANTIGRAVITY\sitesespeciais.com.br\SITESESPECIAIS.COM.BR\pnpm-lock.yaml
+
+   ▲ Next.js 15.4.11
+   - Environments: .env.local, .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 20.0s
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+--- PAYLOAD CONFIG LOADING ---
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+   Generating static pages (0/14) ...
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+   Generating static pages (3/14) 
+Error occurred prerendering page "/". Read more: https://nextjs.org/docs/messages/prerender-error
+[Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined.] {
+  digest: '282143157'
+}
+Export encountered an error on /(frontend)/page: /, exiting the build.
+ ⨯ Next.js build worker exited with code: 1 and signal: null
