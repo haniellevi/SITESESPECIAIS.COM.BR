@@ -15,6 +15,7 @@ import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import { SiteFooter } from '@/components/site/SiteFooter'
 import { Navbar } from '@/components/layout/Navbar'
+import { CustomCursor } from '@/components/ui/CustomCursor'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -80,7 +81,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               preview: isEnabled,
             }}
           />
+          <CustomCursor />
           <main className="flex-1">{children}</main>
+          <SiteFooter />
           <div className="grain-overlay" aria-hidden="true" />
         </Providers>
       </body>
