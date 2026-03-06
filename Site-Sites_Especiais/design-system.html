@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxotaOS — Design System</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet">
+    <!-- Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                        tech: ['Share Tech Mono', 'monospace']
+                    },
+                    colors: {
+                        luxota: {
+                            bg: '#020203',
+                            card: '#08080A',
+                            border: '#ffffff08',
+                            accent: '#4FD1C5',
+                            accentGlow: '#4FD1C540',
+                            dim: '#9ca3af',
+                            surface: '#ffffff03'
+                        }
+                    },
+                    letterSpacing: {
+                        tighter: '-0.04em',
+                        tightest: '-0.07em'
+                    },
+                    backgroundImage: {
+                        'aurora': 'conic-gradient(from 180deg at 50% 50%, #0A0A0C 0deg, #111827 120deg, #0A0A0C 360deg)',
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'text-shimmer': 'text-shimmer 3s ease-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        'text-shimmer': {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '100%': { backgroundPosition: '100% 50%' },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    },
+                    transitionTimingFunction: {
+                        'expo': 'cubic-bezier(0.19, 1, 0.22, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --cursor-size: 20px;
+        }
+        body {
+            background-color: #020203;
+            color: #E5E5E5;
+            overflow-x: hidden;
+            cursor: none;
+        }
+        /* Ambient Background blobs */
+        .ambient-light {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: blob 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(79, 209, 197, 0.15) 0%, transparent 70%); }
+        .blob-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%); animation-delay: -5s; }
+        .blob-3 { top: 40%; left: 40%; width: 40vw; height: 40vw; background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%); animation-delay: -10s; }
+        /* Preloader */
+        #preloader {
+            position: fixed; inset: 0; z-index: 9999;
+            background-color: #020203;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0;
+            pointer-events: none;
+            border-radius: 50%; z-index: 99999;
+        }
+        .cursor-dot { width: 6px; height: 6px; background-color: white; box-shadow: 0 0 10px white; }
+        .cursor-outline {
+            width: 40px; height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(2px);
+            display: flex; align-items: center; justify-content: center;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .cursor-text {
+            font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: black; opacity: 0; pointer-events: none;
+        }
+        /* Noise Grain */
+        .noise {
+            position: fixed; inset: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9000; opacity: 0.035;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+        }
+        /* Premium Gradient Text */
+        .text-gradient-premium {
+            background: linear-gradient(to right, #fff 20%, #4FD1C5 50%, #fff 80%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: text-shimmer 5s ease-in-out infinite alternate;
+        }
+        /* Perspective Grid */
+        .perspective-grid {
+            transform: perspective(1000px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            background-size: 80px 80px;
+            background-image:
+            linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            width: 200vw; height: 200vh;
+            position: absolute; top: 50%; left: -50%;
+            mask-image: radial-gradient(circle at center, black 0%, transparent 50%);
+        }
+        /* Premium Spotlight Card */
+        .spotlight-card {
+            background: rgba(255, 255, 255, 0.015);
+            position: relative; overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .spotlight-card::before {
+            content: ""; position: absolute; inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.3), transparent 40%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0; transition: opacity 0.5s;
+        }
+        .spotlight-card::after {
+            content: ""; position: absolute; left: 0; top: 0; right: 0; bottom: 0;
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(79, 209, 197, 0.05), transparent 40%);
+            z-index: 0; opacity: 0; transition: opacity 0.5s; pointer-events: none;
+        }
+        .spotlight-card:hover::before, .spotlight-card:hover::after { opacity: 1; }
+        .spotlight-card:hover { transform: translateY(-2px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.1); }
+        /* Lenis */
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        /* Typography Utilities */
+        .highlight-word { display: inline-block; will-change: transform, opacity, filter; }
+        .faq-content { overflow: hidden; height: 0; opacity: 0; }
+        /* Button Glow */
+        .btn-glow {
+            position: absolute; inset: -2px;
+            background: linear-gradient(45deg, #4FD1C5, #ffffff, #4FD1C5);
+            filter: blur(10px); opacity: 0; transition: opacity 0.3s;
+            z-index: -1;
+        }
+        .group:hover .btn-glow { opacity: 0.4; }
+
+        /* Design System Specific Styles */
+        .ds-section {
+            padding: 100px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            z-index: 10;
+        }
+        .ds-container {
+            max-w: 7xl;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .ds-title {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.75rem;
+            color: #4FD1C5;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            display: block;
+        }
+        .ds-component-box {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body class="selection:bg-luxota-accent/30 selection:text-luxota-accent antialiased">
+
+    <!-- Ambient Background -->
+    <div class="ambient-light">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="flex flex-col items-center justify-center gap-6 text-center z-50">
+            <div class="relative">
+                <div class="text-[12rem] font-medium leading-none tracking-tighter text-white/5 relative z-10 font-sans">
+                    <span id="counter">0</span>%
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-luxota-bg via-transparent to-transparent z-20"></div>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+                <div class="flex items-center gap-3 text-xs font-mono text-luxota-accent uppercase tracking-[0.2em]">
+                    <iconify-icon icon="solar:refresh-circle-linear" class="animate-spin text-lg"></iconify-icon>
+                    <span>System Initialization</span>
+                </div>
+                <div class="w-48 h-[1px] bg-white/10 mt-2 overflow-hidden rounded-full">
+                    <div id="loader-bar" class="w-full h-full bg-gradient-to-r from-luxota-accent to-white origin-left scale-x-0"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:flex">
+        <span class="cursor-text">View</span>
+    </div>
+
+    <!-- Noise Overlay -->
+    <div class="noise"></div>
+
+    <!-- DS Navbar -->
+    <nav class="fixed top-8 left-0 right-0 z-50 flex justify-center pointer-events-none opacity-0 reveal-nav">
+        <div class="pointer-events-auto bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-full px-2 py-2 flex items-center gap-1 shadow-2xl transition-all duration-500 hover:border-white/20 hover:bg-white/[0.08]">
+            <a href="#ds-hero" class="px-4 py-2 text-xs font-medium text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-all">Hero</a>
+            <a href="#ds-typography" class="px-4 py-2 text-xs font-medium text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-all">Typography</a>
+            <a href="#ds-colors" class="px-4 py-2 text-xs font-medium text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-all">Colors &amp; Surfaces</a>
+            <a href="#ds-components" class="px-4 py-2 text-xs font-medium text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-all">Components</a>
+            <a href="#ds-layout" class="px-4 py-2 text-xs font-medium text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-all">Layout</a>
+            <a href="#ds-motion" class="px-4 py-2 text-xs font-medium text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-all">Motion</a>
+            <a href="#ds-icons" class="px-4 py-2 text-xs font-medium text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-all">Icons</a>
+        </div>
+    </nav>
+
+    <!-- Logo Mark -->
+    <div class="fixed top-9 left-8 z-40 mix-blend-difference pointer-events-none opacity-0 reveal-nav">
+        <div class="text-sm font-semibold tracking-tight text-white flex items-center gap-3">
+            <div class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-luxota-accent opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-luxota-accent shadow-[0_0_15px_#4FD1C5]"></span>
+            </div>
+            <span class="tracking-[0.2em] text-xs">DESIGN SYSTEM</span>
+        </div>
+    </div>
+
+    <!-- 0) HERO (EXACT CLONE, TEXT ADAPTED) -->
+    <section class="relative h-screen flex flex-col items-center justify-center overflow-hidden" id="ds-hero">
+        <div class="perspective-grid opacity-30"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-luxota-accent/10 rounded-full blur-[150px] pointer-events-none"></div>
+        
+        <!-- Particles Background -->
+        <div id="particles-js" class="absolute inset-0 -z-10"></div>
+
+        <div class="relative z-10 text-center max-w-7xl px-6">
+            <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-10 opacity-0 reveal-hero-fade shadow-lg">
+                <span class="w-1.5 h-1.5 bg-luxota-accent rounded-full shadow-[0_0_10px_#4FD1C5]"></span>
+                <span class="text-[10px] uppercase tracking-widest text-white/80 font-medium">Design System v1.0</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl lg:text-[7rem] font-medium tracking-tightest text-white leading-[0.9] mb-10">
+                <div class="overflow-hidden py-2"><span class="block reveal-text drop-shadow-2xl">The Living Asset</span></div>
+                <div class="overflow-hidden flex justify-center gap-4 items-center flex-wrap py-2">
+                    <span class="block reveal-text text-white/30 italic font-serif tracking-tight pr-4">for</span>
+                    <span class="block reveal-text text-gradient-premium">Luxota UI</span>
+                </div>
+            </h1>
+
+            <p class="text-lg md:text-xl text-luxota-dim max-w-xl mx-auto leading-relaxed mb-14 font-light opacity-0 reveal-hero-fade translate-y-4">
+                This document serves as the single source of truth for design tokens, typography, surfaces, interactions, and component logic.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 opacity-0 reveal-hero-fade delay-200">
+                <button class="group relative px-9 py-4 bg-white text-luxota-bg rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.4)]">
+                    <div class="btn-glow"></div>
+                    <span class="relative z-10 text-sm font-bold flex items-center gap-2">
+                        Explore Components
+                        <iconify-icon icon="solar:arrow-right-linear" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+                    </span>
+                    <div class="absolute inset-0 bg-luxota-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-expo"></div>
+                </button>
+                <button class="px-9 py-4 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all text-white font-medium text-sm hover:border-white/30 hover:shadow-lg">
+                    View Guidelines
+                </button>
+            </div>
+        </div>
+
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-0 reveal-hero-fade delay-500 z-20">
+            <span class="text-[9px] text-white/30 tracking-[0.3em] uppercase">Scroll to explore</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- 1) TYPOGRAPHY -->
+    <section class="ds-section" id="ds-typography">
+        <div class="ds-container">
+            <span class="ds-title">[ 01 — TYPOGRAPHY ]</span>
+            <h2 class="text-4xl font-medium text-white mb-12">Font Hierarchy &amp; Scale</h2>
+            
+            <div class="border border-white/10 rounded-[2rem] bg-[#050507] overflow-hidden">
+                <div class="divide-y divide-white/5">
+                    
+                    <!-- Heading 1 (Hero) -->
+                    <div class="p-8 flex items-center justify-between">
+                        <div class="w-1/4 text-luxota-dim text-sm font-mono">Heading 1</div>
+                        <div class="w-1/2 text-5xl md:text-7xl lg:text-[7rem] font-medium tracking-tightest text-white leading-[0.9]">
+                            System
+                        </div>
+                        <div class="w-1/4 text-right text-luxota-dim text-sm font-mono opacity-50">112px / 0.9</div>
+                    </div>
+
+                    <!-- Heading 1 Premium Gradient -->
+                    <div class="p-8 flex items-center justify-between bg-white/[0.01]">
+                        <div class="w-1/4 text-luxota-dim text-sm font-mono">Heading 1 Gradient</div>
+                        <div class="w-1/2 text-5xl md:text-7xl lg:text-[7rem] font-medium tracking-tightest leading-[0.9]">
+                            <span class="text-gradient-premium">Luxota</span>
+                        </div>
+                        <div class="w-1/4 text-right text-luxota-dim text-sm font-mono opacity-50">112px / 0.9</div>
+                    </div>
+                    
+                    <!-- Heading 2 -->
+                    <div class="p-8 flex items-center justify-between">
+                        <div class="w-1/4 text-luxota-dim text-sm font-mono">Heading 2</div>
+                        <div class="w-1/2 text-6xl md:text-9xl font-medium tracking-tightest text-white leading-[0.85]">
+                            Launch your
+                        </div>
+                        <div class="w-1/4 text-right text-luxota-dim text-sm font-mono opacity-50">128px / 0.85</div>
+                    </div>
+
+                    <!-- Heading 3 -->
+                    <div class="p-8 flex items-center justify-between bg-white/[0.01]">
+                        <div class="w-1/4 text-luxota-dim text-sm font-mono">Heading 3</div>
+                        <div class="w-1/2 text-4xl md:text-6xl font-medium tracking-tight text-white leading-[1.1]">
+                            Where does your
+                        </div>
+                        <div class="w-1/4 text-right text-luxota-dim text-sm font-mono opacity-50">60px / 1.1</div>
+                    </div>
+
+                    <!-- Heading 4 -->
+                    <div class="p-8 flex items-center justify-between">
+                        <div class="w-1/4 text-luxota-dim text-sm font-mono">Heading 4</div>
+                        <div class="w-1/2 text-3xl md:text-4xl font-medium text-white tracking-tight">
+                            Common Questions
+                        </div>
+                        <div class="w-1/4 text-right text-luxota-dim text-sm font-mono opacity-50">36px / Tight</div>
+                    </div>
+
+                    <!-- Card Title -->
+                    <div class="p-8 flex items-center justify-between bg-white/[0.01]">
+                        <div class="w-1/4 text-luxota-dim text-sm font-mono">Card Title</div>
+                        <div class="w-1/2 text-2xl text-white font-medium">
+                            Fragmented Agency
+                        </div>
+                        <div class="w-1/4 text-right text-luxota-dim text-sm font-mono opacity-50">24px / Normal</div>
+                    </div>
+
+                    <!-- Bold L -->
+                    <div class="p-8 flex items-center justify-between">
+                        <div class="w-1/4 text-luxota-dim text-sm font-mono">Bold L</div>
+                        <div class="w-1/2 text-xl font-bold text-white">
+                            Read More
+                        </div>
+                        <div class="w-1/4 text-right text-luxota-dim text-sm font-mono opacity-50">20px / Normal</div>
+                    </div>
+                    
+                    <!-- Bold M -->
+                    <div class="p-8 flex items-center justify-between bg-white/[0.01]">
+                        <div class="w-1/4 text-luxota-dim text-sm font-mono">Bold M</div>
+                        <div class="w-1/2 text-sm font-bold text-white">
+                            Initialize System
+                        </div>
+                        <div class="w-1/4 text-right text-luxota-dim text-sm font-mono opacity-50">14px / Normal</div>
+                    </div>
+                    
+                    <!-- Paragraph (Large Body) -->
+                    <div class="p-8 flex items-center justify-between">
+                        <div class="w-1/4 text-luxota-dim text-sm font-mono">Paragraph</div>
+                        <div class="w-1/2 text-lg md:text-xl text-luxota-dim leading-relaxed font-light">
+                            Luxota helps small and medium travel agencies grow — from fragmented operations to structured, scalable businesses.
+                        </div>
+                        <div class="w-1/4 text-right text-luxota-dim text-sm font-mono opacity-50">20px / Relaxed</div>
+                    </div>
+
+                    <!-- Body Regular (M) -->
+                    <div class="p-8 flex items-center justify-between bg-white/[0.01]">
+                        <div class="w-1/4 text-luxota-dim text-sm font-mono">Regular M</div>
+                        <div class="w-1/2 text-base text-luxota-dim/60">
+                            Operations are scattered and managed across disconnected tools.
+                        </div>
+                        <div class="w-1/4 text-right text-luxota-dim text-sm font-mono opacity-50">16px / Normal</div>
+                    </div>
+
+                    <!-- Body Small (S) -->
+                    <div class="p-8 flex items-center justify-between">
+                        <div class="w-1/4 text-luxota-dim text-sm font-mono">Regular S</div>
+                        <div class="w-1/2 text-sm text-luxota-dim">
+                            Continuous runtime in live production environments.
+                        </div>
+                        <div class="w-1/4 text-right text-luxota-dim text-sm font-mono opacity-50">14px / Normal</div>
+                    </div>
+
+                    <!-- Eyebrow / Mono -->
+                    <div class="p-8 flex items-center justify-between bg-white/[0.01]">
+                        <div class="w-1/4 text-luxota-dim text-sm font-mono">Mono Details</div>
+                        <div class="w-1/2 text-xs text-luxota-accent font-mono tracking-widest uppercase">
+                            [ 02 — ARCHITECTURE ]
+                        </div>
+                        <div class="w-1/4 text-right text-luxota-dim text-sm font-mono opacity-50">12px / Widest</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2) COLORS & SURFACES -->
+    <section class="ds-section bg-[#020203]" id="ds-colors">
+        <div class="ds-container">
+            <span class="ds-title">[ 02 — COLORS &amp; SURFACES ]</span>
+            <h2 class="text-4xl font-medium text-white mb-12">Core Palette &amp; Backgrounds</h2>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                <!-- Color Swatch -->
+                <div class="space-y-4">
+                    <div class="h-32 rounded-2xl bg-luxota-bg border border-white/10 shadow-lg"></div>
+                    <div>
+                        <div class="text-white font-medium">Deep Void Black</div>
+                        <div class="text-xs text-luxota-dim font-mono mt-1">#020203</div>
+                        <div class="text-xs text-luxota-dim/50 mt-1">bg-luxota-bg</div>
+                    </div>
+                </div>
+                <!-- Color Swatch -->
+                <div class="space-y-4">
+                    <div class="h-32 rounded-2xl bg-[#08080A] border border-white/10 shadow-lg"></div>
+                    <div>
+                        <div class="text-white font-medium">Card Background</div>
+                        <div class="text-xs text-luxota-dim font-mono mt-1">#08080A</div>
+                        <div class="text-xs text-luxota-dim/50 mt-1">bg-luxota-card</div>
+                    </div>
+                </div>
+                <!-- Color Swatch -->
+                <div class="space-y-4">
+                    <div class="h-32 rounded-2xl bg-[#4FD1C5] shadow-[0_0_20px_#4FD1C540]"></div>
+                    <div>
+                        <div class="text-white font-medium">Teal Accent</div>
+                        <div class="text-xs text-luxota-dim font-mono mt-1">#4FD1C5</div>
+                        <div class="text-xs text-luxota-dim/50 mt-1">bg-luxota-accent</div>
+                    </div>
+                </div>
+                <!-- Color Swatch -->
+                <div class="space-y-4">
+                    <div class="h-32 rounded-2xl bg-[#9ca3af] border border-white/10"></div>
+                    <div>
+                        <div class="text-white font-medium">Dim Gray</div>
+                        <div class="text-xs text-luxota-dim font-mono mt-1">#9ca3af</div>
+                        <div class="text-xs text-luxota-dim/50 mt-1">text-luxota-dim</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-medium text-white mb-6">Surfaces &amp; Blurs</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+                <!-- Background image for realistic blur demonstration -->
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(79,209,197,0.3),transparent_40%)] pointer-events-none rounded-[2rem]"></div>
+                
+                <!-- Badge Surface -->
+                <div class="p-12 border border-white/5 bg-[#050507] rounded-[2rem] flex items-center justify-center relative z-10">
+                    <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md shadow-lg">
+                        <span class="text-xs text-white">bg-white/5 backdrop-blur-md</span>
+                    </div>
+                </div>
+                
+                <!-- Nav Surface -->
+                <div class="p-12 border border-white/5 bg-[#050507] rounded-[2rem] flex items-center justify-center relative z-10">
+                    <div class="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-full px-6 py-4 shadow-2xl">
+                        <span class="text-xs text-white">bg-white/[0.03] backdrop-blur-xl</span>
+                    </div>
+                </div>
+
+                <!-- Glows -->
+                <div class="p-12 border border-white/5 bg-[#050507] rounded-[2rem] flex items-center justify-center relative z-10 overflow-hidden min-h-[200px]">
+                    <div class="w-[200px] h-[200px] bg-luxota-accent/20 rounded-full blur-[50px] absolute"></div>
+                    <span class="text-xs text-white relative z-10">Accent Glow (bg-luxota-accent/20 blur)</span>
+                </div>
+                
+                <!-- Radiant Gradients -->
+                 <div class="p-12 border border-white/5 bg-[#050507] rounded-[2rem] flex items-center justify-center relative z-10 overflow-hidden">
+                     <div class="absolute inset-0 bg-gradient-to-t from-luxota-accent/5 to-transparent"></div>
+                     <span class="text-xs text-white relative z-10">bg-gradient-to-t from-luxota-accent/5</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3) UI COMPONENTS -->
+    <section class="ds-section" id="ds-components">
+        <div class="ds-container">
+            <span class="ds-title">[ 03 — UI COMPONENTS ]</span>
+            <h2 class="text-4xl font-medium text-white mb-12">Interactive Elements</h2>
+
+            <!-- Buttons -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-medium text-white mb-6">Buttons</h3>
+                <div class="ds-component-box flex flex-wrap gap-8 items-center bg-[#050507]">
+                    <!-- CTA Primary Glow -->
+                    <div class="flex flex-col gap-4 text-center">
+                        <button class="group relative px-9 py-4 bg-white text-luxota-bg rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.4)]">
+                            <div class="btn-glow"></div>
+                            <span class="relative z-10 text-sm font-bold flex items-center gap-2">
+                                Primary CTA
+                                <iconify-icon icon="solar:arrow-right-linear" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+                            </span>
+                            <div class="absolute inset-0 bg-luxota-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-expo"></div>
+                        </button>
+                        <span class="text-xs text-luxota-dim font-mono">Default / Hover</span>
+                    </div>
+
+                    <!-- Secondary Outline -->
+                    <div class="flex flex-col gap-4 text-center">
+                        <button class="px-9 py-4 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all text-white font-medium text-sm hover:border-white/30 hover:shadow-lg">
+                            Secondary Outline
+                        </button>
+                        <span class="text-xs text-luxota-dim font-mono">Hover: bg-white/10 + border</span>
+                    </div>
+
+                    <!-- Small Nav Button -->
+                    <div class="flex flex-col gap-4 text-center">
+                        <a href="#" class="group px-6 py-2.5 text-xs font-bold text-luxota-bg bg-white rounded-full hover:bg-luxota-accent transition-colors shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                            Nav Button <span class="hidden group-hover:inline-block ml-1 transition-all">→</span>
+                        </a>
+                        <span class="text-xs text-luxota-dim font-mono">Small Nav Fill</span>
+                    </div>
+
+                    <!-- Text Link -->
+                    <div class="flex flex-col gap-4 text-center mt-4 md:mt-0">
+                        <a href="#" class="group inline-flex items-center gap-3 text-white text-sm font-medium hover:text-luxota-accent transition-colors">
+                            <div class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:border-luxota-accent group-hover:bg-luxota-accent/10 transition-all bg-white/5">
+                                <iconify-icon icon="solar:arrow-right-linear" class="group-hover:translate-x-0.5 transition-transform"></iconify-icon>
+                            </div>
+                            <span class="border-b border-transparent group-hover:border-luxota-accent/50 transition-all">Text Link</span>
+                        </a>
+                        <span class="text-xs text-luxota-dim font-mono">Link with Icon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-medium text-white mb-6">Spotlight Cards</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Standard Spotlight Card -->
+                    <div class="spotlight-card rounded-[2rem] p-10 flex flex-col justify-between group cursor-none min-h-[300px] bg-[#08080A]">
+                        <div class="relative z-10">
+                            <div class="inline-flex p-4 rounded-2xl bg-white/5 border border-white/10 mb-6 shadow-xl backdrop-blur-md">
+                                <iconify-icon icon="solar:shield-warning-linear" class="text-4xl text-luxota-accent"></iconify-icon>
+                            </div>
+                            <h3 class="text-2xl text-white font-medium mb-3">Card Title</h3>
+                            <p class="text-base text-luxota-dim">Card description. Notice the custom spotlight hover effect blending stroke and radial gradients upon mouse movement.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Component -->
+                    <div class="space-y-4">
+                        <div class="faq-item group border border-white/5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] transition-all overflow-hidden">
+                            <button class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                                <span class="text-lg text-white/90 group-hover:text-white transition-colors font-medium">FAQ Accordion Closed</span>
+                                <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center transition-colors duration-300 group-hover:bg-white/10">
+                                    <iconify-icon icon="solar:alt-arrow-down-linear" class="text-white text-xl faq-icon transition-transform duration-300"></iconify-icon>
+                                </div>
+                            </button>
+                            <div class="faq-content">
+                                <div class="px-6 pb-8 text-luxota-dim leading-relaxed">
+                                    Content goes here.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item group border border-white/5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] transition-all overflow-hidden active">
+                            <button class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                                <span class="text-lg text-white/90 group-hover:text-white transition-colors font-medium">FAQ Accordion Open</span>
+                                <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center transition-colors duration-300 group-hover:bg-white/10">
+                                    <iconify-icon icon="solar:alt-arrow-down-linear" class="text-white text-xl faq-icon transition-transform duration-300 rotate-180"></iconify-icon>
+                                </div>
+                            </button>
+                            <div class="faq-content" style="height: auto; opacity: 1;">
+                                <div class="px-6 pb-8 text-luxota-dim leading-relaxed">
+                                    This simulates an open FAQ state. Notice the border transition and icon rotation.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tags & Badges -->
+            <div>
+                <h3 class="text-2xl font-medium text-white mb-6">Tags &amp; Badges</h3>
+                <div class="ds-component-box flex flex-wrap gap-6 items-center bg-[#050507]">
+                    
+                    <!-- Pre-title tag -->
+                    <div class="inline-flex items-center gap-3">
+                        <span class="w-1.5 h-1.5 bg-luxota-accent rounded-full shadow-[0_0_10px_#4FD1C5]"></span>
+                        <span class="text-[10px] uppercase tracking-widest text-white/80 font-medium">System Tag</span>
+                    </div>
+
+                    <!-- Mini accent tag -->
+                    <span class="text-[10px] px-2.5 py-1 rounded-full bg-luxota-accent/10 text-luxota-accent border border-luxota-accent/20 font-medium tracking-wide uppercase">
+                        Luxota Standard
+                    </span>
+
+                    <!-- Mono title -->
+                    <div class="flex items-center gap-3">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-luxota-accent opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-luxota-accent"></span>
+                        </span>
+                        <span class="text-xs text-luxota-accent font-mono tracking-[0.2em] uppercase">Provenance</span>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- 4) LAYOUT & SPACING -->
+    <section class="ds-section bg-[#020203]" id="ds-layout">
+        <div class="ds-container">
+            <span class="ds-title">[ 04 — LAYOUT &amp; SPACING ]</span>
+            <h2 class="text-4xl font-medium text-white mb-12">Grid Systems</h2>
+
+            <!-- Grid Example 1: Bento 4 / 8 -->
+            <div class="mb-12">
+                <h3 class="text-xl text-luxota-dim font-mono mb-4 text-sm">Pattern 1: Asymmetric Split (col-4 / col-8)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 opacity-80">
+                    <div class="md:col-span-4 rounded-2xl border border-white/20 border-dashed bg-white/5 h-48 flex items-center justify-center p-6 text-center">
+                        <span class="text-luxota-dim font-mono text-sm">Sticky Text Block (col-4)</span>
+                    </div>
+                    <div class="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="rounded-2xl border border-white/20 border-dashed bg-white/5 h-48 flex items-center justify-center p-6 text-center">
+                            <span class="text-luxota-dim font-mono text-sm">Tall Card (span-1)</span>
+                        </div>
+                        <div class="flex flex-col gap-6 h-48">
+                            <div class="rounded-2xl border border-white/20 border-dashed bg-white/5 flex-1 flex items-center justify-center p-6 text-center">
+                                <span class="text-luxota-dim font-mono text-sm">Small Card</span>
+                            </div>
+                            <div class="rounded-2xl border border-white/20 border-dashed bg-white/5 flex-1 flex items-center justify-center p-6 text-center">
+                                <span class="text-luxota-dim font-mono text-sm">Small Card</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Example 2: Container Split -->
+            <div>
+                <h3 class="text-xl text-luxota-dim font-mono mb-4 text-sm">Pattern 2: Half Split (col-5 / col-7)</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 opacity-80 items-center">
+                    <div class="lg:col-span-5 rounded-2xl border border-white/20 border-dashed bg-white/5 h-64 flex items-center justify-center p-6 text-center">
+                        <span class="text-luxota-dim font-mono text-sm">Content (col-5)</span>
+                    </div>
+                    <div class="lg:col-span-7 rounded-2xl border border-white/20 border-dashed bg-white/5 h-80 flex items-center justify-center p-6 text-center">
+                        <span class="text-luxota-dim font-mono text-sm">Visuals / Images (col-7)</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- 5) MOTION & INTERACTION -->
+    <section class="ds-section" id="ds-motion">
+        <div class="ds-container">
+            <span class="ds-title">[ 05 — MOTION &amp; INTERACTION ]</span>
+            <h2 class="text-4xl font-medium text-white mb-12">Motion Gallery</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Infinite Spinners -->
+                <div class="ds-component-box flex flex-col items-center justify-center text-center bg-[#050507] min-h-[300px]">
+                    <div class="relative w-32 h-32 flex items-center justify-center mb-6">
+                        <div class="absolute w-24 h-24 border border-luxota-accent/40 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                        <div class="absolute w-32 h-32 border border-white/10 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                        <div class="w-2 h-2 bg-luxota-accent rounded-full shadow-[0_0_15px_#4FD1C5]"></div>
+                    </div>
+                    <span class="text-white font-medium block mb-1">Orbiting Rings</span>
+                    <span class="text-xs text-luxota-dim font-mono">animate-[spin_Xs_linear_infinite]</span>
+                </div>
+
+                <!-- Floating Elements -->
+                <div class="ds-component-box flex flex-col items-center justify-center text-center bg-[#050507] min-h-[300px]">
+                    <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md animate-float mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center">
+                                <iconify-icon icon="solar:graph-up-bold"></iconify-icon>
+                            </div>
+                            <div class="text-left">
+                                <div class="text-[10px] text-luxota-dim uppercase tracking-wider">Revenue</div>
+                                <div class="text-sm font-bold text-white">+124%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="text-white font-medium block mb-1">Floating Elements</span>
+                    <span class="text-xs text-luxota-dim font-mono">animate-float</span>
+                </div>
+
+                <!-- Progress Bar Expansion -->
+                <div class="ds-component-box flex flex-col items-center justify-center text-center bg-[#050507] min-h-[300px] group cursor-pointer relative overflow-hidden">
+                    <p class="text-sm text-luxota-dim mb-10 pointer-events-none">Hover me to see progress expansion</p>
+                    <div class="relative w-full max-w-[200px] h-1.5 bg-white/5 rounded-full overflow-hidden">
+                        <div class="absolute inset-0 bg-luxota-accent/20"></div>
+                        <div class="h-full bg-luxota-accent w-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[1.5s] ease-expo"></div>
+                    </div>
+                    <span class="text-white font-medium block mt-10">Scale Transition</span>
+                    <span class="text-xs text-luxota-dim font-mono">duration-[1.5s] ease-expo</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6) ICONS -->
+    <section class="ds-section bg-[#020203]" id="ds-icons">
+        <div class="ds-container">
+            <span class="ds-title">[ 06 — ICONS ]</span>
+            <h2 class="text-4xl font-medium text-white mb-12">Solar Iconify Library</h2>
+            
+            <p class="text-luxota-dim max-w-2xl mb-12">
+                All icons are sourced from Iconify's Solar collection. The standard uses `linear` for outlines and `bold`/`bold-duotone` for solid elements. Colors inherit from parent text color.
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-6">
+                <div class="flex flex-col items-center justify-center p-8 border border-white/5 rounded-2xl bg-white/[0.02]">
+                    <iconify-icon icon="solar:laptop-minimalistic-linear" class="text-3xl text-white mb-4"></iconify-icon>
+                    <span class="text-[10px] font-mono text-luxota-dim text-center">laptop-minimalistic-linear</span>
+                </div>
+                <div class="flex flex-col items-center justify-center p-8 border border-white/5 rounded-2xl bg-white/[0.02]">
+                    <iconify-icon icon="solar:network-linear" class="text-3xl text-white mb-4"></iconify-icon>
+                    <span class="text-[10px] font-mono text-luxota-dim text-center">network-linear</span>
+                </div>
+                <div class="flex flex-col items-center justify-center p-8 border border-white/5 rounded-2xl bg-white/[0.02]">
+                    <iconify-icon icon="solar:shield-warning-linear" class="text-3xl text-white mb-4"></iconify-icon>
+                    <span class="text-[10px] font-mono text-luxota-dim text-center">shield-warning-linear</span>
+                </div>
+                <div class="flex flex-col items-center justify-center p-8 border border-white/5 rounded-2xl bg-white/[0.02]">
+                    <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="text-3xl text-white mb-4"></iconify-icon>
+                    <span class="text-[10px] font-mono text-luxota-dim text-center">layers-min-bold-duotone</span>
+                </div>
+                <div class="flex flex-col items-center justify-center p-8 border border-white/5 rounded-2xl bg-white/[0.02]">
+                    <iconify-icon icon="solar:calendar-linear" class="text-3xl text-white mb-4"></iconify-icon>
+                    <span class="text-[10px] font-mono text-luxota-dim text-center">calendar-linear</span>
+                </div>
+                <div class="flex flex-col items-center justify-center p-8 border border-white/5 rounded-2xl bg-white/[0.02]">
+                    <iconify-icon icon="solar:globe-linear" class="text-3xl text-white mb-4"></iconify-icon>
+                    <span class="text-[10px] font-mono text-luxota-dim text-center">globe-linear</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="relative py-24 px-6 border-t border-white/5 bg-[#020203] overflow-hidden">
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-luxota-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-[-5%] left-0 right-0 select-none pointer-events-none flex justify-center opacity-[0.03]">
+            <h1 class="text-[18vw] font-bold text-white tracking-tighter leading-none">LUXOTA</h1>
+        </div>
+        <div class="max-w-7xl mx-auto relative z-10 text-center">
+            <span class="text-white/50 text-sm font-mono uppercase tracking-widest">Design System v1.0</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const lenis = new Lenis({
+                duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                direction: 'vertical', smooth: true,
+            });
+            lenis.stop();
+
+            lenis.on('scroll', ScrollTrigger.update)
+            gsap.ticker.add((time)=>{ lenis.raf(time * 1000) })
+            gsap.ticker.lagSmoothing(0)
+
+            const loaderBar = document.getElementById("loader-bar");
+            const counterElement = document.getElementById("counter");
+            const preloader = document.getElementById("preloader");
+            const preloaderTl = gsap.timeline({
+                onComplete: () => {
+                    lenis.start();
+                }
+            });
+
+            preloaderTl.to(loaderBar, { scaleX: 1, duration: 1.5, ease: "power2.inOut" })
+            .to(counterElement, { innerText: 100, duration: 1.5, snap: { innerText: 1 }, ease: "power2.inOut" }, "<")
+            .to(preloader, { yPercent: -100, duration: 1, ease: "power4.inOut", delay: 0.2 })
+            .fromTo(".reveal-nav", { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.5")
+            .to(".reveal-text", { y: "0%", duration: 1.2, stagger: 0.05, ease: "power4.out" }, "-=0.8")
+            .to(".reveal-hero-fade", { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out" }, "-=0.8");
+
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            const cursorText = document.querySelector('.cursor-text');
+            const cards = document.querySelectorAll('.spotlight-card');
+            
+            gsap.set(cursorDot, { xPercent: -50, yPercent: -50 });
+            gsap.set(cursorOutline, { xPercent: -50, yPercent: -50 });
+            
+            window.addEventListener('mousemove', (e) => {
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+                
+                gsap.set(cursorDot, { x: mouseX, y: mouseY });
+                gsap.to(cursorOutline, { x: mouseX, y: mouseY, duration: 0.15, ease: "power2.out" });
+                
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty('--mouse-x', `${mouseX - rect.left}px`);
+                    card.style.setProperty('--mouse-y', `${mouseY - rect.top}px`);
+                });
+            });
+
+            const faqItems = document.querySelectorAll('.faq-item:not(.active)');
+            faqItems.forEach(item => {
+                const button = item.querySelector('button');
+                const content = item.querySelector('.faq-content');
+                const icon = item.querySelector('.faq-icon');
+                button.addEventListener('click', () => {
+                    const isOpen = item.classList.contains('active');
+                    // We only have one actual interactive FAQ for demo, but we'll allow standard behavior
+                    faqItems.forEach(otherItem => {
+                        const otherContent = otherItem.querySelector('.faq-content');
+                        const otherIcon = otherItem.querySelector('.faq-icon');
+                        gsap.to(otherContent, { height: 0, opacity: 0, duration: 0.3 });
+                        gsap.to(otherIcon, { rotation: 0, duration: 0.3 });
+                        otherItem.classList.remove('active');
+                    });
+                    if (!isOpen) {
+                        gsap.to(content, { height: 'auto', opacity: 1, duration: 0.4 });
+                        gsap.to(icon, { rotation: 180, duration: 0.3 });
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#ffffff" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.2, random: false },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.1, width: 1 },
+                    move: { enable: true, speed: 0.5, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
+                },
+                interactivity: {
+                    detect_on: "window",
+                    events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" }, resize: true },
+                    modes: { grab: { distance: 200, line_linked: { opacity: 0.3 } }, push: { particles_nb: 4 } }
+                },
+                retina_detect: true
+            });
+        });
+    </script>
+</body></html>

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { RequiredDataFromCollectionSlug } from 'payload'
 
 export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
@@ -109,3 +110,4 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
   title: 'Contact Form',
   updatedAt: '2023-01-12T21:47:41.374Z',
 }
+

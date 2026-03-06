@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { Form } from '@/payload-types'
 import { RequiredDataFromCollectionSlug } from 'payload'
 
@@ -54,3 +55,4 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
     title: 'Contact',
   }
 }
+

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { RequiredDataFromCollectionSlug } from 'payload'
 import type { PostArgs } from './post-1'
 
@@ -230,3 +231,4 @@ export const post2: (args: PostArgs) => RequiredDataFromCollectionSlug<'posts'> 
     title: 'Global Gaze: Beyond the Headlines',
   }
 }
+

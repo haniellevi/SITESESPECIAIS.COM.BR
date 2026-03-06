@@ -1,0 +1,71 @@
+
+> @1.0.0 build C:\Users\hanie\Searches\OneDrive\Documentos\ANTIGRAVITY\sitesespeciais.com.br\SITESESPECIAIS.COM.BR
+> cross-env NODE_OPTIONS=--no-deprecation next build
+
+ ⚠ Warning: Found multiple lockfiles. Selecting C:\Users\hanie\package-lock.json.
+   Consider removing the lockfiles at:
+   * C:\Users\hanie\Searches\OneDrive\Documentos\ANTIGRAVITY\sitesespeciais.com.br\SITESESPECIAIS.COM.BR\pnpm-lock.yaml
+
+   ▲ Next.js 15.4.11
+   - Environments: .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 19.0s
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+--- PAYLOAD CONFIG LOADING ---
+PAYLOAD_SECRET: DEFINED
+DATABASE_URL: DEFINED
+g: You are not allowed to perform this action.
+    at e (C:\Users\hanie\Searches\OneDrive\Documentos\ANTIGRAVITY\sitesespeciais.com.br\SITESESPECIAIS.COM.BR\.next\server\chunks\867.js:324:28603)
+    at async l (C:\Users\hanie\Searches\OneDrive\Documentos\ANTIGRAVITY\sitesespeciais.com.br\SITESESPECIAIS.COM.BR\.next\server\chunks\867.js:116:8883)
+    at async Object.o [as generateStaticParams] (C:\Users\hanie\Searches\OneDrive\Documentos\ANTIGRAVITY\sitesespeciais.com.br\SITESESPECIAIS.COM.BR\.next\server\app\(frontend)\posts\page\[pageNumber]\page.js:2:13325) {
+  data: null,
+  isOperational: true,
+  isPublic: true,
+  status: 403,
+  [cause]: null
+}
+
+> Build error occurred
+[Error: Failed to collect page data for /posts/page/[pageNumber]] {
+  type: 'Error'
+}
+ ELIFECYCLE  Command failed with exit code 1.
