@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight, ExternalLink, ZoomIn } from 'lucide-react'
 import { createPortal } from 'react-dom'
+import Image from 'next/image'
 
 type Project = {
   id: string
@@ -216,10 +217,12 @@ export function PortfolioGallery() {
                   <div className="relative group">
                     {/* Moldura sutil ao redor da imagem */}
                     <div className="absolute -inset-1 bg-gradient-to-tr from-white/10 to-transparent rounded-2xl blur-sm opacity-50"></div>
-                    <img
+                    <Image
                       src={selectedProject.gallery[currentImageIndex]}
                       alt={`${selectedProject.title}`}
-                      className="relative max-w-full max-h-[50vh] md:max-h-[55vh] object-contain rounded-xl shadow-[0_30px_60px_rgba(0,0,0,0.5)] border border-white/10"
+                      width={1200}
+                      height={800}
+                      className="relative w-auto h-auto max-w-full max-h-[50vh] md:max-h-[55vh] object-contain rounded-xl shadow-[0_30px_60px_rgba(0,0,0,0.5)] border border-white/10"
                     />
                   </div>
                 </motion.div>
@@ -260,11 +263,12 @@ export function PortfolioGallery() {
             onClick={() => openModal(idx)}
           >
             <div className="absolute inset-0 z-0">
-              <img
+              <Image
                 src={project.thumbnail}
                 alt={project.title}
-                className="w-full h-full object-cover opacity-40 group-hover:opacity-70 transition-all duration-700 scale-110 group-hover:scale-100"
-                referrerPolicy="no-referrer"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover opacity-40 group-hover:opacity-70 transition-all duration-700 scale-110 group-hover:scale-100"
               />
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-80"></div>

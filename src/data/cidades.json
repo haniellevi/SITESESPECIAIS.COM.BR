@@ -1,0 +1,97 @@
+[
+  { "slug": "balsas-ma", "name": "Balsas", "state": "MA", "region": "Nordeste" },
+  { "slug": "acailandia-ma", "name": "Açailândia", "state": "MA", "region": "Nordeste" },
+  { "slug": "bacabal-ma", "name": "Bacabal", "state": "MA", "region": "Nordeste" },
+  { "slug": "santa-ines-ma", "name": "Santa Inês", "state": "MA", "region": "Nordeste" },
+  { "slug": "pinheiro-ma", "name": "Pinheiro", "state": "MA", "region": "Nordeste" },
+  { "slug": "chapadinha-ma", "name": "Chapadinha", "state": "MA", "region": "Nordeste" },
+  { "slug": "barra-do-corda-ma", "name": "Barra do Corda", "state": "MA", "region": "Nordeste" },
+  { "slug": "grajau-ma", "name": "Grajaú", "state": "MA", "region": "Nordeste" },
+  { "slug": "picos-pi", "name": "Picos", "state": "PI", "region": "Nordeste" },
+  { "slug": "floriano-pi", "name": "Floriano", "state": "PI", "region": "Nordeste" },
+  { "slug": "piripiri-pi", "name": "Piripiri", "state": "PI", "region": "Nordeste" },
+  { "slug": "campo-maior-pi", "name": "Campo Maior", "state": "PI", "region": "Nordeste" },
+  {
+    "slug": "sao-raimundo-nonato-pi",
+    "name": "São Raimundo Nonato",
+    "state": "PI",
+    "region": "Nordeste"
+  },
+  { "slug": "oeiras-pi", "name": "Oeiras", "state": "PI", "region": "Nordeste" },
+  { "slug": "bom-jesus-pi", "name": "Bom Jesus", "state": "PI", "region": "Nordeste" },
+  { "slug": "urucui-pi", "name": "Uruçuí", "state": "PI", "region": "Nordeste" },
+  {
+    "slug": "sao-joao-do-piaui-pi",
+    "name": "São João do Piauí",
+    "state": "PI",
+    "region": "Nordeste"
+  },
+  { "slug": "araguaina-to", "name": "Araguaína", "state": "TO", "region": "Norte" },
+  { "slug": "gurupi-to", "name": "Gurupi", "state": "TO", "region": "Norte" },
+  { "slug": "porto-nacional-to", "name": "Porto Nacional", "state": "TO", "region": "Norte" },
+  {
+    "slug": "paraiso-do-tocantins-to",
+    "name": "Paraíso do Tocantins",
+    "state": "TO",
+    "region": "Norte"
+  },
+  {
+    "slug": "colinas-do-tocantins-to",
+    "name": "Colinas do Tocantins",
+    "state": "TO",
+    "region": "Norte"
+  },
+  { "slug": "guarai-to", "name": "Guaraí", "state": "TO", "region": "Norte" },
+  {
+    "slug": "luis-eduardo-magalhaes-ba",
+    "name": "Luís Eduardo Magalhães",
+    "state": "BA",
+    "region": "Oeste Baiano"
+  },
+  { "slug": "barreiras-ba", "name": "Barreiras", "state": "BA", "region": "Oeste Baiano" },
+  { "slug": "sao-desiderio-ba", "name": "São Desidério", "state": "BA", "region": "Oeste Baiano" },
+  {
+    "slug": "formosa-do-rio-preto-ba",
+    "name": "Formosa do Rio Preto",
+    "state": "BA",
+    "region": "Oeste Baiano"
+  },
+  { "slug": "correntina-ba", "name": "Correntina", "state": "BA", "region": "Oeste Baiano" },
+  {
+    "slug": "bom-jesus-da-lapa-ba",
+    "name": "Bom Jesus da Lapa",
+    "state": "BA",
+    "region": "Oeste Baiano"
+  },
+  { "slug": "guanambi-ba", "name": "Guanambi", "state": "BA", "region": "Sudoeste Baiano" },
+  { "slug": "goiana-pe", "name": "Goiana", "state": "PE", "region": "Nordeste" },
+  { "slug": "ipojuca-pe", "name": "Ipojuca", "state": "PE", "region": "Nordeste" },
+  { "slug": "garanhuns-pe", "name": "Garanhuns", "state": "PE", "region": "Nordeste" },
+  {
+    "slug": "vitoria-de-santo-antao-pe",
+    "name": "Vitória de Santo Antão",
+    "state": "PE",
+    "region": "Nordeste"
+  },
+  {
+    "slug": "santa-cruz-do-capibaribe-pe",
+    "name": "Santa Cruz do Capibaribe",
+    "state": "PE",
+    "region": "Nordeste"
+  },
+  { "slug": "serra-talhada-pe", "name": "Serra Talhada", "state": "PE", "region": "Nordeste" },
+  { "slug": "araripina-pe", "name": "Araripina", "state": "PE", "region": "Nordeste" },
+  { "slug": "gravata-pe", "name": "Gravatá", "state": "PE", "region": "Nordeste" },
+  { "slug": "carpina-pe", "name": "Carpina", "state": "PE", "region": "Nordeste" },
+  { "slug": "salgueiro-pe", "name": "Salgueiro", "state": "PE", "region": "Nordeste" },
+  { "slug": "eusebio-ce", "name": "Eusébio", "state": "CE", "region": "Nordeste" },
+  { "slug": "crato-ce", "name": "Crato", "state": "CE", "region": "Nordeste" },
+  { "slug": "itapipoca-ce", "name": "Itapipoca", "state": "CE", "region": "Nordeste" },
+  { "slug": "iguatu-ce", "name": "Iguatu", "state": "CE", "region": "Nordeste" },
+  { "slug": "quixada-ce", "name": "Quixadá", "state": "CE", "region": "Nordeste" },
+  { "slug": "pacajus-ce", "name": "Pacajus", "state": "CE", "region": "Nordeste" },
+  { "slug": "horizonte-ce", "name": "Horizonte", "state": "CE", "region": "Nordeste" },
+  { "slug": "tiangua-ce", "name": "Tianguá", "state": "CE", "region": "Nordeste" },
+  { "slug": "crateus-ce", "name": "Crateús", "state": "CE", "region": "Nordeste" },
+  { "slug": "aracati-ce", "name": "Aracati", "state": "CE", "region": "Nordeste" }
+]

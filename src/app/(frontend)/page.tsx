@@ -15,10 +15,15 @@ import {
 } from 'lucide-react'
 import { PrimaryButton, SecondaryButton, NavButton, Tag } from '@/components/luxota-ui'
 import { FAQSection } from '@/components/faq'
-import { ContactModal } from '@/components/contact-modal'
+import dynamic from 'next/dynamic'
 import { PortfolioGallery } from '@/components/portfolio-gallery'
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
+
+const ContactModal = dynamic(
+  () => import('@/components/contact-modal').then((mod) => mod.ContactModal),
+  { ssr: false },
+)
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -121,7 +126,7 @@ export default function Home() {
                 initial={{ y: '100%' }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1, ease: [0.19, 1, 0.22, 1], delay: 0.1 }}
-                className="block text-white/30 italic font-serif tracking-tight pr-4"
+                className="block text-white/30 italic font-serif tracking-tight px-2"
               >
                 aparece no Google.
               </motion.span>

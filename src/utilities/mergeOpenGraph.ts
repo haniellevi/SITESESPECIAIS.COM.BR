@@ -3,14 +3,18 @@ import { getServerSideURL } from './getURL'
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
-  description: 'An open-source website built with Payload and Next.js.',
+  description:
+    'Criamos sites premium, autoritativos e de ultra-performance para negócios que buscam domínio digital em 2026. Design exclusivo, SEO avançado e experiência de luxo.',
   images: [
     {
-      url: `${getServerSideURL()}/website-template-OG.webp`,
+      url: `${getServerSideURL()}/og-image.png`,
+      width: 1200,
+      height: 630,
+      alt: 'Sites Especiais - Agência de Sites Premium',
     },
   ],
-  siteName: 'Payload Website Template',
-  title: 'Payload Website Template',
+  siteName: 'Sites Especiais',
+  title: 'Sites Especiais — Domine o Google com Design Premium',
 }
 
 export const mergeOpenGraph = (og?: Metadata['openGraph']): Metadata['openGraph'] => {
