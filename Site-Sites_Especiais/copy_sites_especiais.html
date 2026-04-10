@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sites Especiais — Sites Premium que Transformam Negócios</title>
+<meta name="description" content="Sites premium personalizados para empresas que querem ser encontradas, respeitadas e escolhidas. Agência especializada em presença digital de alto impacto.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0B0E14;
+    --bg-section: #10141C;
+    --bg-card: #161B27;
+    --accent: #C8A44E;
+    --accent-light: #E4C96A;
+    --accent-glow: rgba(200, 164, 78, 0.15);
+    --text-primary: #F0EDE6;
+    --text-secondary: #9BA3B5;
+    --text-muted: #5E6578;
+    --border: rgba(200, 164, 78, 0.12);
+    --gradient-gold: linear-gradient(135deg, #C8A44E 0%, #E4C96A 50%, #C8A44E 100%);
+    --gradient-dark: linear-gradient(180deg, #0B0E14 0%, #10141C 100%);
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', -apple-system, sans-serif;
+    --max-w: 1200px;
+    --section-pad: clamp(80px, 10vw, 140px);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--bg-deep);
+  }
+
+  img { max-width: 100%; display: block; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ══════════ UTILITY ══════════ */
+  .container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 40px);
+  }
+
+  .gold-line {
+    width: 60px;
+    height: 2px;
+    background: var(--gradient-gold);
+    margin-bottom: 24px;
+  }
+
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  /* ══════════ ANIMATIONS ══════════ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(200,164,78,0.2); }
+    50% { box-shadow: 0 0 40px rgba(200,164,78,0.4); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ══════════ NAV ══════════ */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 20px 0;
+    transition: all 0.4s ease;
+    background: transparent;
+  }
+
+  nav.scrolled {
+    background: rgba(11, 14, 20, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.5px;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent);
+    color: var(--bg-deep);
+  }
+
+  /* ══════════ HERO ══════════ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 120px 0 var(--section-pad);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -20%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(200,164,78,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to top, var(--bg-deep), transparent);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.2s;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 5.5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.4s;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+    position: relative;
+  }
+
+  .hero-sub {
+    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+    color: var(--text-secondary);
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.6s;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.8s;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: var(--gradient-gold);
+    color: var(--bg-deep);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.85rem;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(200,164,78,0.3);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid var(--text-muted);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .hero-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 1s;
+  }
+
+  .hero-proof-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-proof-number {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .hero-proof-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ══════════ PROBLEM (PAIN) ══════════ */
+  .problem {
+    padding: var(--section-pad) 0;
+    position: relative;
+    background: var(--bg-section);
+  }
+
+  .problem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  .problem-intro {
+    max-width: 700px;
+    margin-bottom: 60px;
+  }
+
+  .problem-intro p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .pain-card {
+    padding: 36px 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pain-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #C0392B, transparent);
+    opacity: 0.6;
+  }
+
+  .pain-card:hover {
+    border-color: rgba(192, 57, 43, 0.3);
+    transform: translateY(-4px);
+  }
+
+  .pain-icon {
+    font-size: 1.6rem;
+    margin-bottom: 16px;
+  }
+
+  .pain-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  .pain-card p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* ══════════ AMPLIFY ══════════ */
+  .amplify {
+    padding: var(--section-pad) 0;
+    position: relative;
+  }
+
+  .amplify-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .amplify-quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    position: relative;
+    padding: 0 20px;
+  }
+
+  .amplify-quote::before {
+    content: '"';
+    font-family: var(--font-display);
+    font-size: 6rem;
+    color: var(--accent);
+    opacity: 0.2;
+    position: absolute;
+    top: -40px;
+    left: -10px;
+    line-height: 1;
+  }
+
+  .amplify-stat {
+    display: inline-block;
+    padding: 20px 40px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-top: 40px;
+  }
+
+  .amplify-stat-number {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .amplify-stat-text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ══════════ STORY / TRANSFORMATION ══════════ */
+  .transformation {
+    padding: var(--section-pad) 0;
+    background: var(--bg-section);
+    position: relative;
+  }
+
+  .transformation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  .transform-header {
+    max-width: 700px;
+    margin-bottom: 60px;
+  }
+
+  .transform-header p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+
+  .before-after {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 60px;
+  }
+
+  .ba-column h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+
+  .ba-before h3 { color: var(--text-muted); }
+  .ba-after h3 { color: var(--accent); }
+
+  .ba-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .ba-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .ba-list li span {
+    flex-shrink: 0;
+    font-size: 1.1rem;
+  }
+
+  .ba-divider {
+    width: 1px;
+    min-height: 100%;
+    background: linear-gradient(180deg, transparent, var(--accent), transparent);
+    position: relative;
+  }
+
+  .ba-divider::after {
+    content: '→';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg-section);
+    color: var(--accent);
+    padding: 12px 4px;
+    font-size: 1.2rem;
+  }
+
+  /* ══════════ OFFER / SERVICES ══════════ */
+  .offer {
+    padding: var(--section-pad) 0;
+  }
+
+  .offer-header {
+    max-width: 700px;
+    margin-bottom: 60px;
+  }
+
+  .offer-header p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  .offer-card {
+    padding: 40px 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.4s ease;
+    position: relative;
+  }
+
+  .offer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-gold);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .offer-card:hover::before { opacity: 1; }
+
+  .offer-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .offer-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--accent-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+
+  .offer-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .offer-card p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .offer-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .offer-card ul li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .offer-card ul li::before {
+    content: '✦';
+    color: var(--accent);
+    font-size: 0.65rem;
+  }
+
+  /* ══════════ PROOF / PORTFOLIO ══════════ */
+  .proof {
+    padding: var(--section-pad) 0;
+    background: var(--bg-section);
+    position: relative;
+  }
+
+  .proof::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  .proof-header {
+    max-width: 700px;
+    margin-bottom: 60px;
+  }
+
+  .proof-header p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  .portfolio-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  .portfolio-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .portfolio-thumb {
+    height: 200px;
+    background: linear-gradient(135deg, var(--bg-deep), var(--bg-card));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .portfolio-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(200,164,78,0.05), rgba(200,164,78,0.02));
+  }
+
+  .portfolio-info {
+    padding: 28px;
+  }
+
+  .portfolio-info h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .portfolio-info p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+
+  .portfolio-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--accent-glow);
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    margin-top: 12px;
+  }
+
+  /* ══════════ PROCESS ══════════ */
+  .process {
+    padding: var(--section-pad) 0;
+  }
+
+  .process-header {
+    max-width: 700px;
+    margin-bottom: 60px;
+  }
+
+  .process-header p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 32px;
+    counter-reset: step;
+  }
+
+  .step {
+    position: relative;
+    padding: 36px 28px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    counter-increment: step;
+    transition: all 0.4s ease;
+  }
+
+  .step:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .step::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .step h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .step p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* ══════════ GUARANTEE ══════════ */
+  .guarantee {
+    padding: var(--section-pad) 0;
+    background: var(--bg-section);
+    position: relative;
+  }
+
+  .guarantee::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  .guarantee-box {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 60px 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    position: relative;
+  }
+
+  .guarantee-icon {
+    font-size: 3rem;
+    margin-bottom: 24px;
+  }
+
+  .guarantee-box h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .guarantee-box h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .guarantee-box p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ══════════ OBJECTION BUSTER ══════════ */
+  .objections {
+    padding: var(--section-pad) 0;
+  }
+
+  .objections-header {
+    max-width: 700px;
+    margin-bottom: 60px;
+  }
+
+  .faq-list {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .faq-item:hover { border-color: rgba(200,164,78,0.3); }
+
+  .faq-question {
+    padding: 24px 28px;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.3s ease;
+    user-select: none;
+  }
+
+  .faq-question:hover { color: var(--accent); }
+
+  .faq-toggle {
+    color: var(--accent);
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+
+  .faq-item.open .faq-toggle { transform: rotate(45deg); }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 300px;
+    padding: 0 28px 24px;
+  }
+
+  .faq-answer p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  /* ══════════ FINAL CTA ══════════ */
+  .final-cta {
+    padding: var(--section-pad) 0;
+    background: var(--bg-section);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(200,164,78,0.06), transparent 70%);
+    pointer-events: none;
+  }
+
+  .final-cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .final-cta h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .final-cta h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .final-cta > .container > .final-cta-content > p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .final-cta .btn-primary {
+    font-size: 0.9rem;
+    padding: 18px 48px;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .final-note {
+    margin-top: 24px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ══════════ FOOTER ══════════ */
+  footer {
+    padding: 48px 0 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-brand {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .footer-brand span { color: var(--accent); }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover { color: var(--accent); }
+
+  .footer-copy {
+    width: 100%;
+    text-align: center;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  /* ══════════ RESPONSIVE ══════════ */
+  @media (max-width: 768px) {
+    .before-after {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .ba-divider {
+      width: 100%;
+      min-height: 1px;
+      height: 1px;
+    }
+
+    .ba-divider::after {
+      content: '↓';
+      top: 0;
+    }
+
+    .hero-proof {
+      gap: 24px;
+    }
+
+    .nav-cta span { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 2.2rem; }
+    .hero-cta-group { flex-direction: column; }
+    .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="navbar">
+  <div class="container">
+    <a href="#" class="nav-logo">Sites<span>Especiais</span></a>
+    <a href="#agendar" class="nav-cta">Agendar conversa <span>→</span></a>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">Sites Premium Personalizados</div>
+        <h1>
+          Enquanto você não aparece no Google,<br>
+          seu concorrente <em>aparece.</em>
+        </h1>
+        <p class="hero-sub">
+          Cada dia sem um site profissional é um dia em que clientes prontos para comprar encontram outra empresa — não a sua. Nós criamos sites premium que transformam visitantes em clientes e sua marca em referência.
+        </p>
+        <div class="hero-cta-group">
+          <a href="#agendar" class="btn-primary">Agendar Diagnóstico Gratuito →</a>
+          <a href="#portfolio" class="btn-secondary">Ver projetos realizados</a>
+        </div>
+        <div class="hero-proof">
+          <div class="hero-proof-item">
+            <span class="hero-proof-number">50+</span>
+            <span class="hero-proof-label">Sites entregues</span>
+          </div>
+          <div class="hero-proof-item">
+            <span class="hero-proof-number">98%</span>
+            <span class="hero-proof-label">Clientes satisfeitos</span>
+          </div>
+          <div class="hero-proof-item">
+            <span class="hero-proof-number">7+</span>
+            <span class="hero-proof-label">Anos de mercado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROBLEM (P of PASTOR) ══════════ -->
+<section class="problem">
+  <div class="container">
+    <div class="problem-intro animate-on-scroll">
+      <div class="section-label">O problema que ninguém fala</div>
+      <h2 class="section-title">Seu negócio pode ser <em>excelente</em> — mas se ninguém encontra, ninguém compra.</h2>
+      <p>
+        Você investe em redes sociais, gasta com anúncios, faz o melhor trabalho da região. Mas quando o cliente busca no Google, quem aparece é o concorrente. Não porque ele é melhor. Mas porque ele tem presença digital. E você, não.
+      </p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card animate-on-scroll">
+        <div class="pain-icon">👻</div>
+        <h3>Invisível no Google</h3>
+        <p>97% das pessoas pesquisam online antes de comprar um serviço local. Se você não aparece, para esses clientes você simplesmente não existe.</p>
+      </div>
+      <div class="pain-card animate-on-scroll">
+        <div class="pain-icon">💸</div>
+        <h3>Dinheiro queimado em anúncios</h3>
+        <p>Você roda anúncios que levam para um perfil do Instagram. O cliente olha, não encontra profissionalismo e vai embora. Cada clique desperdiçado é dinheiro que sai do seu bolso.</p>
+      </div>
+      <div class="pain-card animate-on-scroll">
+        <div class="pain-icon">🏳️</div>
+        <h3>Credibilidade zero digital</h3>
+        <p>A primeira impressão agora é online. Sem site, seu negócio parece amador — mesmo que entregue um serviço excepcional há anos.</p>
+      </div>
+      <div class="pain-card animate-on-scroll">
+        <div class="pain-icon">🔗</div>
+        <h3>Refém do algoritmo</h3>
+        <p>Redes sociais mudam as regras quando querem. Seu alcance caiu 80%? Problema seu. Um site próprio é terreno que ninguém tira de você.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ AMPLIFY (A of PASTOR) ══════════ -->
+<section class="amplify">
+  <div class="container">
+    <div class="amplify-content animate-on-scroll">
+      <div class="section-label">A conta chega</div>
+      <blockquote class="amplify-quote">
+        Cada dia sem presença digital profissional não é um dia neutro. É um dia em que clientes que poderiam ser seus estão pagando o concorrente.
+      </blockquote>
+      <p style="color: var(--text-secondary); font-size: 1rem; max-width: 550px; margin: 0 auto; line-height: 1.8;">
+        Pense nos últimos 6 meses. Quantas pessoas pesquisaram seu serviço no Google e encontraram outra empresa? Quantos orçamentos você nunca recebeu simplesmente porque não estava lá?
+      </p>
+      <div class="amplify-stat">
+        <div class="amplify-stat-number">63%</div>
+        <div class="amplify-stat-text">dos consumidores descartam empresas sem site</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STORY + TRANSFORMATION (S + T of PASTOR) ══════════ -->
+<section class="transformation" id="transformacao">
+  <div class="container">
+    <div class="transform-header animate-on-scroll">
+      <div class="section-label">A transformação</div>
+      <h2 class="section-title">Da <em>invisibilidade</em> à autoridade digital em semanas — não em meses.</h2>
+      <p>
+        Nossos clientes saíram exatamente de onde você está agora. Sem site, sem presença, dependendo de indicação e rede social. Hoje, eles são encontrados, respeitados e escolhidos — todos os dias, no automático.
+      </p>
+    </div>
+
+    <div class="before-after animate-on-scroll">
+      <div class="ba-column ba-before">
+        <h3>✕ &nbsp;Antes</h3>
+        <ul class="ba-list">
+          <li><span>◇</span> Depende 100% de indicação boca a boca</li>
+          <li><span>◇</span> Perde clientes que pesquisam no Google</li>
+          <li><span>◇</span> Anúncios sem destino profissional</li>
+          <li><span>◇</span> Concorrentes menores parecem maiores</li>
+          <li><span>◇</span> Imagem amadora transmitida ao mercado</li>
+        </ul>
+      </div>
+      <div class="ba-divider"></div>
+      <div class="ba-column ba-after">
+        <h3>✦ &nbsp;Depois</h3>
+        <ul class="ba-list">
+          <li><span>✦</span> Clientes chegam pelo Google, todos os dias</li>
+          <li><span>✦</span> Autoridade e credibilidade instantâneas</li>
+          <li><span>✦</span> Anúncios convertendo em site profissional</li>
+          <li><span>✦</span> Compete de igual com empresas muito maiores</li>
+          <li><span>✦</span> Imagem premium que reflete a qualidade real</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ OFFER (O of PASTOR) ══════════ -->
+<section class="offer" id="servicos">
+  <div class="container">
+    <div class="offer-header animate-on-scroll">
+      <div class="section-label">O que entregamos</div>
+      <h2 class="section-title">Não é um site. É uma <em>máquina de credibilidade</em> que trabalha por você 24h.</h2>
+      <p>Cada projeto é construído do zero, sob medida para o seu negócio. Sem templates genéricos. Sem "arrasta pra cá e pronto". Site premium de verdade — como seu negócio merece.</p>
+    </div>
+
+    <div class="offer-grid">
+      <div class="offer-card animate-on-scroll">
+        <div class="offer-card-icon">🎨</div>
+        <h3>Design Exclusivo e Premium</h3>
+        <p>Seu site não vai parecer com nenhum outro. Design original que transmite exatamente o posicionamento que sua marca merece.</p>
+        <ul>
+          <li>Layout 100% personalizado para seu negócio</li>
+          <li>Identidade visual que gera confiança imediata</li>
+          <li>Responsivo e impecável em qualquer tela</li>
+        </ul>
+      </div>
+      <div class="offer-card animate-on-scroll">
+        <div class="offer-card-icon">📈</div>
+        <h3>Otimizado para Google (SEO)</h3>
+        <p>De nada adianta um site bonito que ninguém encontra. Cada página é construída para o Google te mostrar aos clientes certos.</p>
+        <ul>
+          <li>Estrutura técnica otimizada para ranqueamento</li>
+          <li>Velocidade de carregamento profissional</li>
+          <li>Configuração do Google Meu Negócio integrada</li>
+        </ul>
+      </div>
+      <div class="offer-card animate-on-scroll">
+        <div class="offer-card-icon">🎯</div>
+        <h3>Copy que Converte Visitantes</h3>
+        <p>Textos escritos com técnicas de persuasão profissional. Não é lorem ipsum. É cada palavra escolhida para transformar visitante em cliente.</p>
+        <ul>
+          <li>Textos persuasivos baseados no seu avatar</li>
+          <li>CTAs estratégicos em cada seção</li>
+          <li>Integração direta com WhatsApp</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- VALUE STACK -->
+    <div class="animate-on-scroll" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: clamp(32px, 5vw, 56px); max-width: 800px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 36px;">
+        <div class="section-label">Tudo incluído no seu projeto</div>
+        <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 600;">O que você recebe</h3>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border);">
+          <span style="color: var(--text-primary); font-size: 0.95rem;">✦ &nbsp;Site premium com design exclusivo (5-10 páginas)</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border);">
+          <span style="color: var(--text-primary); font-size: 0.95rem;">✦ &nbsp;Copywriting profissional em todas as páginas</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border);">
+          <span style="color: var(--text-primary); font-size: 0.95rem;">✦ &nbsp;SEO técnico + configuração Google Meu Negócio</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border);">
+          <span style="color: var(--text-primary); font-size: 0.95rem;">✦ &nbsp;Responsivo para mobile, tablet e desktop</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border);">
+          <span style="color: var(--text-primary); font-size: 0.95rem;">✦ &nbsp;Integração com WhatsApp e redes sociais</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border);">
+          <span style="color: var(--text-primary); font-size: 0.95rem;">✦ &nbsp;Hospedagem + SSL (cadeado de segurança)</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border);">
+          <span style="color: var(--text-primary); font-size: 0.95rem;">✦ &nbsp;Painel para você editar textos e imagens</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0;">
+          <span style="color: var(--text-primary); font-size: 0.95rem;">✦ &nbsp;Suporte dedicado por 90 dias após entrega</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROOF / PORTFOLIO ══════════ -->
+<section class="proof" id="portfolio">
+  <div class="container">
+    <div class="proof-header animate-on-scroll">
+      <div class="section-label">Quem já confiou</div>
+      <h2 class="section-title">Empresas que saíram da <em>invisibilidade</em> para a autoridade digital.</h2>
+      <p>Cada projeto é uma parceria. Entendemos o negócio a fundo antes de desenhar uma única tela. Veja alguns dos resultados:</p>
+    </div>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-card animate-on-scroll">
+        <div class="portfolio-thumb">Fiel Alimentos</div>
+        <div class="portfolio-info">
+          <h3>Fiel Alimentos</h3>
+          <p>Site institucional premium que posicionou a marca como referência regional no segmento alimentício.</p>
+          <span class="portfolio-tag">Site Institucional</span>
+        </div>
+      </div>
+      <div class="portfolio-card animate-on-scroll">
+        <div class="portfolio-thumb">EmCorr</div>
+        <div class="portfolio-info">
+          <h3>EmCorr</h3>
+          <p>Presença digital completa para empresa de soluções industriais com foco em autoridade e geração de leads B2B.</p>
+          <span class="portfolio-tag">Site + Landing Page</span>
+        </div>
+      </div>
+      <div class="portfolio-card animate-on-scroll">
+        <div class="portfolio-thumb">Clínica Pinheiro</div>
+        <div class="portfolio-info">
+          <h3>Clínica Pinheiro</h3>
+          <p>Site de alta conversão para clínica de saúde com integração direta para agendamento via WhatsApp.</p>
+          <span class="portfolio-tag">Site + Conversão</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROCESS / HOW IT WORKS ══════════ -->
+<section class="process" id="processo">
+  <div class="container">
+    <div class="process-header animate-on-scroll">
+      <div class="section-label">Como funciona</div>
+      <h2 class="section-title">Do diagnóstico ao site no ar em <em>4 passos simples.</em></h2>
+      <p>Você foca no que faz de melhor — cuidar do seu negócio. Nós cuidamos de tudo: estratégia, design, textos, tecnologia e publicação.</p>
+    </div>
+    <div class="steps">
+      <div class="step animate-on-scroll">
+        <h3>Conversa de Diagnóstico</h3>
+        <p>Uma call gratuita de 30 minutos para entender seu negócio, seus objetivos e o que diferencia você no mercado. Zero compromisso.</p>
+      </div>
+      <div class="step animate-on-scroll">
+        <h3>Estratégia + Proposta</h3>
+        <p>Montamos um plano personalizado com escopo, prazo e investimento claro. Você aprova ou ajusta antes de começarmos.</p>
+      </div>
+      <div class="step animate-on-scroll">
+        <h3>Design, Copy e Desenvolvimento</h3>
+        <p>Criamos o design, escrevemos os textos e desenvolvemos o site. Você acompanha e valida cada etapa.</p>
+      </div>
+      <div class="step animate-on-scroll">
+        <h3>Publicação + Suporte</h3>
+        <p>Seu site vai ao ar, configurado e otimizado. E ficamos ao seu lado por 90 dias para garantir que tudo funcione perfeitamente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GUARANTEE ══════════ -->
+<section class="guarantee">
+  <div class="container">
+    <div class="guarantee-box animate-on-scroll">
+      <div class="guarantee-icon">🛡️</div>
+      <h2>Satisfação <em>garantida</em> ou refazemos.</h2>
+      <p>Se na entrega do projeto você não sentir que o site representa a qualidade que seu negócio merece, nós refazemos — sem custo adicional. Simples assim. Porque se não for para entregar excelência, preferimos não entregar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ OBJECTIONS / FAQ ══════════ -->
+<section class="objections">
+  <div class="container">
+    <div class="objections-header animate-on-scroll">
+      <div class="section-label">Antes de decidir</div>
+      <h2 class="section-title">Talvez você esteja pensando...</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          "Agora não é o momento certo. Vou fazer isso mais pra frente."
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Cada semana sem presença digital é uma semana em que clientes prontos para comprar encontram seu concorrente em vez de você. O "momento certo" era ontem. O segundo melhor momento é agora. A conversa de diagnóstico é gratuita — você não perde nada descobrindo o que está deixando na mesa.</p>
+        </div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          "Já tenho redes sociais. Preciso mesmo de um site?"
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Redes sociais são terreno alugado — o algoritmo muda e seu alcance despenca do dia pra noite. Um site é seu endereço fixo na internet: aparece no Google, funciona 24h, transmite credibilidade e é a base para qualquer estratégia de marketing funcionar de verdade.</p>
+        </div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          "É muito caro. Não sei se vale o investimento."
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Quanto custa um cliente que você perde por semana por não ter presença digital? Se apenas 2 clientes novos por mês chegarem pelo Google, o site se paga em poucas semanas. Isso não é gasto — é o investimento com o maior retorno que uma empresa local pode fazer hoje.</p>
+        </div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          "Já fiz um site antes e não trouxe resultado."
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Um site de template sem estratégia, sem SEO e sem copy profissional é como abrir uma loja no deserto. Não é o site que falhou — foi a falta de estratégia por trás dele. Nossos projetos são construídos para aparecer no Google, converter visitantes e gerar resultado real.</p>
+        </div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          "Eu não entendo nada de tecnologia."
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Perfeito. Você não precisa entender. Nós cuidamos de absolutamente tudo: domínio, hospedagem, e-mail, design, textos, publicação. Você só precisa responder algumas perguntas sobre o seu negócio e validar o resultado. O resto é com a gente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FINAL CTA (R of PASTOR — Response) ══════════ -->
+<section class="final-cta" id="agendar">
+  <div class="container">
+    <div class="final-cta-content animate-on-scroll">
+      <div class="section-label">Próximo passo</div>
+      <h2>Seu negócio merece ser <em>encontrado, respeitado e escolhido.</em></h2>
+      <p style="font-size: 1.1rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 40px;">
+        Agende uma conversa gratuita de 30 minutos. Sem compromisso, sem pressão. Vamos analisar juntos sua presença digital e mostrar exatamente o que você pode ganhar com um site profissional.
+      </p>
+      <a href="https://wa.me/5586999999999?text=Olá!%20Vi%20o%20site%20e%20quero%20agendar%20meu%20diagnóstico%20gratuito." class="btn-primary" style="font-size: 0.9rem; padding: 20px 52px;">
+        Quero Meu Diagnóstico Gratuito →
+      </a>
+      <p class="final-note">
+        Vagas limitadas por mês para manter a qualidade de cada projeto. Resposta em até 24h.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">Sites<span>Especiais</span></div>
+      <div class="footer-links">
+        <a href="#servicos">Serviços</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#processo">Como Funciona</a>
+        <a href="#agendar">Contato</a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      © 2025 Sites Especiais — Todos os direitos reservados.
+      <br>Agência de sites premium personalizados.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Nav scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ── Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+  // ── FAQ Accordion
+  document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+      const item = question.parentElement;
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+
+      // Toggle current
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // ── Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

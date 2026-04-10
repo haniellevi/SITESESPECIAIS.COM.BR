@@ -9,6 +9,7 @@ const navLinks = [
   { href: '#inicio', label: 'Início' },
   { href: '#portfolio', label: 'Portfólio' },
   { href: '#processo', label: 'Processo' },
+  { href: '#planos', label: 'Planos' },
   { href: '#blog', label: 'Blog' },
   { href: '#contato', label: 'Contato' },
 ]
@@ -44,15 +45,22 @@ export function SiteHeader() {
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
-        <Link href="/" className="flex items-center group" aria-label="Sites Especiais — Home">
-          <picture>
-            <source srcSet="/logos/logo-dark.png" media="(prefers-color-scheme: dark)" />
-            <img
-              src="/logos/logo-light.png"
-              alt="SitesEspeciais"
-              className="h-10 md:h-12 w-auto transition-transform group-hover:scale-105"
-            />
-          </picture>
+        <Link
+          href="/"
+          className="flex items-center gap-2 group"
+          aria-label="Sites Especiais — Home"
+        >
+          <div
+            className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center transition-transform group-hover:scale-105"
+            style={{ transitionDuration: 'var(--duration-fast)' }}
+          >
+            <span className="font-serif italic text-primary-foreground text-xl leading-none font-normal">
+              S
+            </span>
+          </div>
+          <span className="text-foreground text-sm font-sans font-medium tracking-tight hidden sm:inline">
+            Sites <em className="text-primary font-serif not-italic">Especiais</em>
+          </span>
         </Link>
 
         {/* Desktop Nav */}

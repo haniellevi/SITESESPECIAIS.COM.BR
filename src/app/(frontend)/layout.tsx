@@ -15,7 +15,6 @@ import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import { SiteFooter } from '@/components/site/SiteFooter'
 import { Navbar } from '@/components/layout/Navbar'
-import { CustomCursor } from '@/components/ui/CustomCursor'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -61,27 +60,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     >
       <head>
         <InitTheme />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'ProfessionalService',
-              name: 'Sites Especiais',
-              url: 'https://sitesespeciais.com.br',
-              logo: 'https://sitesespeciais.com.br/favicon.png',
-              description:
-                'Agência de Sites Premium e Ultra Performance. Especialistas em SEO e alta conversão. Atendimento 100% digital e nacional.',
-              areaServed: {
-                '@type': 'Country',
-                name: 'Brazil',
-              },
-              priceRange: '$$$',
-            }),
-          }}
-        />
-        <link href="/favicon.png" rel="icon" type="image/png" sizes="32x32" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        <link href="/favicon.ico" rel="icon" sizes="32x32" />
+        <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
@@ -100,9 +80,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               preview: isEnabled,
             }}
           />
-          <CustomCursor />
           <main className="flex-1">{children}</main>
-          <SiteFooter />
           <div className="grain-overlay" aria-hidden="true" />
         </Providers>
       </body>
@@ -112,24 +90,24 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 export const metadata: Metadata = {
   title: {
-    default: 'Sites Especiais — Agência de Sites Premium & Ultra Performance',
+    default: 'Sites Especiais — Agência de Sites Premium',
     template: '%s | Sites Especiais',
   },
   description:
-    'Criamos a presença digital de elite que sua empresa merece. Design premium, velocidade extrema (Core Web Vitals) e foco total em conversão e autoridade no Google.',
+    'Criamos sites profissionais e especiais que transformam visitantes em clientes. Design premium, performance otimizada e resultados reais.',
   keywords: [
-    'criação de sites premium',
-    'agência web design luxury',
-    'desenvolvimento de landing pages profissionais',
-    'SEO 2026',
-    'performance web especializada',
-    'branding digital autoritativo',
+    'criação de sites',
+    'sites profissionais',
+    'agência de sites',
+    'web design',
+    'desenvolvimento web',
+    'landing page',
+    'e-commerce',
   ],
   metadataBase: new URL(getServerSideURL()),
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
     creator: '@sitesespeciais',
-    images: [`${getServerSideURL()}/og-image.png`],
   },
 }

@@ -1,13 +1,344 @@
-import type { Metadata } from 'next'
-import Script from 'next/script'
-import './home.css'
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sites Especiais — Sites Premium que Transformam Negócios</title>
+    <meta
+      name="description"
+      content="Sites premium personalizados para empresas que querem ser encontradas, respeitadas e escolhidas. Agência especializada em presença digital de alto impacto."
+    />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
-export default function HomePage() {
-  return (
-    <>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: `
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['DM Sans', '-apple-system', 'sans-serif'],
+              mono: ['Space Grotesk', 'monospace'],
+              tech: ['Share Tech Mono', 'monospace'],
+              display: ['Playfair Display', 'Georgia', 'serif'],
+            },
+            colors: {
+              luxota: {
+                bg: '#0B0E14',
+                card: '#161B27',
+                border: 'rgba(79, 209, 197, 0.12)',
+                accent: '#4FD1C5',
+                accentGlow: 'rgba(79, 209, 197, 0.15)',
+                dim: '#9BA3B5',
+                surface: '#10141C',
+              },
+            },
+            letterSpacing: {
+              tighter: '-0.04em',
+              tightest: '-0.07em',
+            },
+            backgroundImage: {
+              aurora:
+                'conic-gradient(from 180deg at 50% 50%, #0A0A0C 0deg, #111827 120deg, #0A0A0C 360deg)',
+            },
+            animation: {
+              blob: 'blob 10s infinite',
+              'text-shimmer': 'text-shimmer 3s ease-out infinite alternate',
+              float: 'float 6s ease-in-out infinite',
+            },
+            keyframes: {
+              blob: {
+                '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                '100%': { transform: 'translate(0px, 0px) scale(1)' },
+              },
+              'text-shimmer': {
+                '0%': { backgroundPosition: '0% 50%' },
+                '100%': { backgroundPosition: '100% 50%' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+            },
+            transitionTimingFunction: {
+              expo: 'cubic-bezier(0.19, 1, 0.22, 1)',
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      :root {
+        --cursor-size: 20px;
+      }
+      body {
+        overflow-x: hidden;
+      }
+      @media (min-width: 768px) {
+        body {
+          cursor: none;
+        }
+      }
+      /* Ambient Background blobs */
+      .ambient-light {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.4;
+        animation: blob 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .blob-1 {
+        top: -10%;
+        left: -10%;
+        width: 50vw;
+        height: 50vw;
+        background: radial-gradient(circle, rgba(79, 209, 197, 0.15) 0%, transparent 70%);
+      }
+      .blob-2 {
+        bottom: -10%;
+        right: -10%;
+        width: 60vw;
+        height: 60vw;
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+        animation-delay: -5s;
+      }
+      .blob-3 {
+        top: 40%;
+        left: 40%;
+        width: 40vw;
+        height: 40vw;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+        animation-delay: -10s;
+      }
+
+      /* Preloader */
+      #preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background-color: #0b0e14;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Custom Cursor */
+      .cursor-dot,
+      .cursor-outline {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        border-radius: 50%;
+        z-index: 99999;
+      }
+      .cursor-dot {
+        width: 6px;
+        height: 6px;
+        background-color: white;
+        box-shadow: 0 0 10px white;
+      }
+      .cursor-outline {
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(2px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background-color 0.3s,
+          border-color 0.3s;
+      }
+      .cursor-text {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: black;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Premium Gradient Text */
+      .text-gradient-premium {
+        background: linear-gradient(to right, #fff 20%, #4fd1c5 50%, #fff 80%);
+        background-size: 200% auto;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: text-shimmer 5s ease-in-out infinite alternate;
+      }
+
+      /* Perspective Grid */
+      .perspective-grid {
+        transform: perspective(1000px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+        background-size: 80px 80px;
+        background-image:
+          linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        width: 200vw;
+        height: 200vh;
+        position: absolute;
+        top: 50%;
+        left: -50%;
+        mask-image: radial-gradient(circle at center, black 0%, transparent 50%);
+      }
+
+      /* Premium Spotlight Card */
+      .spotlight-card {
+        background: rgba(255, 255, 255, 0.015);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(10px);
+        transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+      .spotlight-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: radial-gradient(
+          800px circle at var(--mouse-x) var(--mouse-y),
+          rgba(79, 209, 197, 0.3),
+          transparent 40%
+        );
+        -webkit-mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+      .spotlight-card::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+          600px circle at var(--mouse-x) var(--mouse-y),
+          rgba(79, 209, 197, 0.05),
+          transparent 40%
+        );
+        z-index: 0;
+        opacity: 0;
+        transition: opacity 0.5s;
+        pointer-events: none;
+      }
+      .spotlight-card:hover::before,
+      .spotlight-card:hover::after {
+        opacity: 1;
+      }
+      .spotlight-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Lenis */
+      html.lenis {
+        height: auto;
+      }
+      .lenis.lenis-smooth {
+        scroll-behavior: auto;
+      }
+      .lenis.lenis-stopped {
+        overflow: hidden;
+      }
+
+      /* Typography Utilities */
+      .highlight-word {
+        display: inline-block;
+        will-change: transform, opacity, filter;
+      }
+
+      /* Button Glow */
+      .btn-glow {
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(45deg, #4fd1c5, #ffffff, #4fd1c5);
+        filter: blur(10px);
+        opacity: 0;
+        transition: opacity 0.3s;
+        z-index: -1;
+      }
+      .group:hover .btn-glow {
+        opacity: 0.4;
+      }
+
+      /* Custom Copy Utilities */
+      .ds-title {
+        font-family: 'Space Grotesk', monospace;
+        font-size: 0.75rem;
+        color: #4fd1c5;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        display: block;
+      }
+
+      /* FAQ Adjustments */
+      .faq-content {
+        overflow: hidden;
+        height: 0;
+        opacity: 0;
+      }
+
+      /* Noise Grain */
+      .noise {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9000;
+        opacity: 0.035;
+        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+      }
+    </style>
+  </head>
+  <body
+    class="selection:bg-luxota-accent/30 selection:text-luxota-accent antialiased bg-luxota-bg text-white overflow-x-hidden cursor-none"
+  >
     <!-- Texture Overlay -->
     <div class="noise"></div>
     <!-- Ambient Background -->
@@ -671,9 +1002,9 @@ export default function HomePage() {
             </div>
 
             <div class="flex gap-16 px-24 pl-[20vw] items-center h-full w-max" id="cards-track">
-              <!-- Service Card 1: Design -->
+              <!-- Service Card 1 -->
               <div
-                class="w-[70vw] max-w-[900px] h-[65vh] spotlight-card rounded-[2.5rem] p-12 shrink-0 relative flex overflow-hidden border border-white/10 bg-[#08080A]"
+                class="w-[70vw] max-w-[900px] h-[65vh] spotlight-card rounded-[2.5rem] p-12 shrink-0 relative flex overflow-hidden border border-white/10 bg-[#161B27]"
               >
                 <div class="w-5/12 flex flex-col justify-between relative z-10 h-full">
                   <div>
@@ -695,27 +1026,52 @@ export default function HomePage() {
                   </div>
                   <ul class="space-y-4 mt-6">
                     <li class="flex items-center gap-4 text-sm text-luxota-dim/80">
-                      <div class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center">
-                        <iconify-icon icon="solar:check-circle-linear" class="text-luxota-accent"></iconify-icon>
+                      <div
+                        class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center"
+                      >
+                        <iconify-icon
+                          icon="solar:check-circle-linear"
+                          class="text-luxota-accent"
+                        ></iconify-icon>
                       </div>
                       Layout 100% personalizado
                     </li>
                     <li class="flex items-center gap-4 text-sm text-luxota-dim/80">
-                      <div class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center">
-                        <iconify-icon icon="solar:check-circle-linear" class="text-luxota-accent"></iconify-icon>
+                      <div
+                        class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center"
+                      >
+                        <iconify-icon
+                          icon="solar:check-circle-linear"
+                          class="text-luxota-accent"
+                        ></iconify-icon>
                       </div>
-                      Estética Luxota UI
+                      Responsividade Perfeita
                     </li>
                   </ul>
                 </div>
-                <div class="w-7/12 absolute right-0 top-0 bottom-0 flex items-center justify-center overflow-hidden">
-                   <img src="/images/card-design.png" alt="Design Premium" class="w-full h-full object-contain scale-110 translate-x-12 rotate-3 hover:rotate-0 transition-transform duration-700" />
+                <div
+                  class="w-7/12 absolute right-0 top-0 bottom-0 bg-gradient-to-l from-white/[0.02] to-transparent flex items-center justify-center overflow-hidden card-graphic-wrapper"
+                >
+                  <div
+                    class="w-80 h-[28rem] border border-white/10 rounded-2xl relative bg-black/40 backdrop-blur-xl rotate-6 translate-x-12 shadow-2xl transition-transform duration-700 hover:rotate-3"
+                  >
+                    <div class="absolute top-6 left-6 right-6 h-4 bg-white/10 rounded-full"></div>
+                    <div
+                      class="absolute top-16 left-6 w-16 h-16 bg-luxota-accent/20 rounded-full blur-2xl"
+                    ></div>
+                    <div
+                      class="absolute top-16 left-6 w-12 h-12 bg-luxota-accent rounded-full shadow-[0_0_20px_#4FD1C540]"
+                    ></div>
+                    <div
+                      class="absolute bottom-6 left-6 right-6 h-40 bg-white/5 rounded-xl border border-white/5"
+                    ></div>
+                  </div>
                 </div>
               </div>
 
-              <!-- Service Card 2: Copywriting -->
+              <!-- Service Card 2 -->
               <div
-                class="w-[70vw] max-w-[900px] h-[65vh] spotlight-card rounded-[2.5rem] p-12 shrink-0 relative flex overflow-hidden border border-white/10 bg-[#08080A]"
+                class="w-[70vw] max-w-[900px] h-[65vh] spotlight-card rounded-[2.5rem] p-12 shrink-0 relative flex overflow-hidden border border-white/10 bg-[#161B27]"
               >
                 <div class="w-5/12 flex flex-col justify-between relative z-10 h-full">
                   <div>
@@ -732,32 +1088,57 @@ export default function HomePage() {
                     </h3>
                     <p class="text-base text-luxota-dim leading-relaxed font-light">
                       Textos que não apenas enfeitam, mas conduzem o visitante direto para a decisão
-                      de compra com gatilhos de autoridade.
+                      de compra.
                     </p>
                   </div>
                   <ul class="space-y-4 mt-6">
                     <li class="flex items-center gap-4 text-sm text-luxota-dim/80">
-                      <div class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center">
-                        <iconify-icon icon="solar:check-circle-linear" class="text-luxota-accent"></iconify-icon>
+                      <div
+                        class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center"
+                      >
+                        <iconify-icon
+                          icon="solar:check-circle-linear"
+                          class="text-luxota-accent"
+                        ></iconify-icon>
                       </div>
-                      Foco no seu cliente ideal
+                      Persuasão focada no seu cliente ideal
                     </li>
                     <li class="flex items-center gap-4 text-sm text-luxota-dim/80">
-                      <div class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center">
-                        <iconify-icon icon="solar:check-circle-linear" class="text-luxota-accent"></iconify-icon>
+                      <div
+                        class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center"
+                      >
+                        <iconify-icon
+                          icon="solar:check-circle-linear"
+                          class="text-luxota-accent"
+                        ></iconify-icon>
                       </div>
-                      Alta Conversão
+                      Chamadas para Ação (CTAs) eficientes
                     </li>
                   </ul>
                 </div>
-                <div class="w-7/12 absolute right-0 top-0 bottom-0 flex items-center justify-center overflow-hidden">
-                   <img src="/images/card-copy.png" alt="Copywriting" class="w-full h-full object-contain scale-110 translate-x-12 -rotate-3 hover:rotate-0 transition-transform duration-700" />
+                <div
+                  class="w-7/12 absolute right-0 top-0 bottom-0 bg-gradient-to-l from-white/[0.02] to-transparent flex items-center justify-center overflow-hidden card-graphic-wrapper"
+                >
+                  <div
+                    class="w-64 h-80 bg-white/5 border border-white/10 rounded-2xl flex flex-col gap-4 p-6 shadow-2xl backdrop-blur-lg relative"
+                  >
+                    <div class="h-3 w-full bg-white/10 rounded-full"></div>
+                    <div class="h-3 w-2/3 bg-white/10 rounded-full"></div>
+                    <div class="h-3 w-4/5 bg-white/10 rounded-full"></div>
+                    <div class="h-3 w-1/2 bg-white/10 rounded-full"></div>
+                    <div
+                      class="mt-auto h-12 w-full bg-luxota-accent/10 border border-luxota-accent/20 rounded-xl flex items-center justify-center gap-2 text-xs text-luxota-accent font-mono tracking-widest"
+                    >
+                      <iconify-icon icon="solar:hand-stars-outline" class="text-lg"></iconify-icon>
+                      ALTA CONVERSÃO
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <!-- Service Card 3: SEO -->
+              <!-- Service Card 3 -->
               <div
-                class="w-[70vw] max-w-[900px] h-[65vh] spotlight-card rounded-[2.5rem] p-12 shrink-0 relative flex overflow-hidden border border-white/10 bg-[#08080A]"
+                class="w-[70vw] max-w-[900px] h-[65vh] spotlight-card rounded-[2.5rem] p-12 shrink-0 relative flex overflow-hidden border border-white/10 bg-[#161B27]"
               >
                 <div class="w-5/12 flex flex-col justify-between relative z-10 h-full">
                   <div>
@@ -770,114 +1151,52 @@ export default function HomePage() {
                       ></iconify-icon>
                     </div>
                     <h3 class="text-4xl text-white font-medium mb-4 tracking-tight font-display">
-                      SEO & Visibilidade<br />Orgânica
+                      SEO Otimizado e<br />Velocidade Extrema
                     </h3>
                     <p class="text-base text-luxota-dim leading-relaxed font-light">
-                      Apareça para quem já está procurando pelo seu serviço. Estratégia de SEO local
-                      para dominar a sua região.
+                      Arquitetura feita para o Google amar. Combinado com uma otimização técnica
+                      rigorosa, porque sites lentos perdem clientes velozes.
                     </p>
                   </div>
                   <ul class="space-y-4 mt-6">
                     <li class="flex items-center gap-4 text-sm text-luxota-dim/80">
-                      <div class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center">
-                        <iconify-icon icon="solar:check-circle-linear" class="text-luxota-accent"></iconify-icon>
+                      <div
+                        class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center"
+                      >
+                        <iconify-icon
+                          icon="solar:check-circle-linear"
+                          class="text-luxota-accent"
+                        ></iconify-icon>
                       </div>
-                      Topo das buscas do Google
+                      Para ser encontrado organicamente
                     </li>
                     <li class="flex items-center gap-4 text-sm text-luxota-dim/80">
-                      <div class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center">
-                        <iconify-icon icon="solar:check-circle-linear" class="text-luxota-accent"></iconify-icon>
+                      <div
+                        class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center"
+                      >
+                        <iconify-icon
+                          icon="solar:check-circle-linear"
+                          class="text-luxota-accent"
+                        ></iconify-icon>
                       </div>
-                      Mais cliques qualificados
+                      Carregamento instantâneo
                     </li>
                   </ul>
                 </div>
-                <div class="w-7/12 absolute right-0 top-0 bottom-0 flex items-center justify-center overflow-hidden">
-                   <img src="/images/card-seo.png" alt="SEO" class="w-full h-full object-contain scale-125 translate-x-8 rotate-6 hover:rotate-0 transition-transform duration-700" />
-                </div>
-              </div>
-
-              <!-- Service Card 4: Velocidade -->
-              <div
-                class="w-[70vw] max-w-[900px] h-[65vh] spotlight-card rounded-[2.5rem] p-12 shrink-0 relative flex overflow-hidden border border-white/10 bg-[#08080A]"
-              >
-                <div class="w-5/12 flex flex-col justify-between relative z-10 h-full">
-                  <div>
+                <div
+                  class="w-7/12 absolute right-0 top-0 bottom-0 bg-gradient-to-l from-white/[0.02] to-transparent flex items-center justify-center overflow-hidden card-graphic-wrapper"
+                >
+                  <div class="relative w-full h-full flex items-center justify-center">
                     <div
-                      class="inline-flex p-4 rounded-2xl bg-white/5 border border-white/10 mb-8 shadow-xl backdrop-blur-md"
-                    >
-                      <iconify-icon
-                        icon="solar:rocket-bold"
-                        class="text-4xl text-luxota-accent"
-                      ></iconify-icon>
-                    </div>
-                    <h3 class="text-4xl text-white font-medium mb-4 tracking-tight font-display">
-                      Velocidade e<br />Performance
-                    </h3>
-                    <p class="text-base text-luxota-dim leading-relaxed font-light">
-                      Site que carrega em menos de 1 segundo. Porque no mundo digital, cada milissegundo 
-                      de espera é um cliente perdido para a concorrência.
-                    </p>
-                  </div>
-                  <ul class="space-y-4 mt-6">
-                    <li class="flex items-center gap-4 text-sm text-luxota-dim/80">
-                      <div class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center">
-                        <iconify-icon icon="solar:check-circle-linear" class="text-luxota-accent"></iconify-icon>
-                      </div>
-                      Otimização técnica extrema
-                    </li>
-                    <li class="flex items-center gap-4 text-sm text-luxota-dim/80">
-                      <div class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center">
-                        <iconify-icon icon="solar:check-circle-linear" class="text-luxota-accent"></iconify-icon>
-                      </div>
-                      Nota máxima no PageSpeed
-                    </li>
-                  </ul>
-                </div>
-                <div class="w-7/12 absolute right-0 top-0 bottom-0 flex items-center justify-center overflow-hidden">
-                   <img src="/images/card-speed.png" alt="Velocidade" class="w-full h-full object-contain scale-110 translate-x-12 -rotate-3 hover:rotate-0 transition-transform duration-700" />
-                </div>
-              </div>
-
-              <!-- Service Card 5: Responsividade -->
-              <div
-                class="w-[70vw] max-w-[900px] h-[65vh] spotlight-card rounded-[2.5rem] p-12 shrink-0 relative flex overflow-hidden border border-white/10 bg-[#08080A]"
-              >
-                <div class="w-5/12 flex flex-col justify-between relative z-10 h-full">
-                  <div>
+                      class="absolute w-64 h-64 border border-luxota-accent/20 rounded-full animate-[spin_10s_linear_infinite]"
+                    ></div>
                     <div
-                      class="inline-flex p-4 rounded-2xl bg-white/5 border border-white/10 mb-8 shadow-xl backdrop-blur-md"
-                    >
-                      <iconify-icon
-                        icon="solar:smartphone-bold"
-                        class="text-4xl text-luxota-accent"
-                      ></iconify-icon>
-                    </div>
-                    <h3 class="text-4xl text-white font-medium mb-4 tracking-tight font-display">
-                      Responsividade<br />Total
-                    </h3>
-                    <p class="text-base text-luxota-dim leading-relaxed font-light">
-                      Experiência impecável em qualquer dispositivo. Do smartphone mais simples ao 
-                      maior monitor 4K do mercado.
-                    </p>
+                      class="absolute w-96 h-96 border border-white/5 rounded-full animate-[spin_15s_linear_infinite_reverse]"
+                    ></div>
+                    <div
+                      class="w-4 h-4 bg-luxota-accent rounded-full shadow-[0_0_30px_#4FD1C5]"
+                    ></div>
                   </div>
-                  <ul class="space-y-4 mt-6">
-                    <li class="flex items-center gap-4 text-sm text-luxota-dim/80">
-                      <div class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center">
-                        <iconify-icon icon="solar:check-circle-linear" class="text-luxota-accent"></iconify-icon>
-                      </div>
-                      Mobile First real
-                    </li>
-                    <li class="flex items-center gap-4 text-sm text-luxota-dim/80">
-                      <div class="w-6 h-6 rounded-full bg-luxota-accent/10 flex items-center justify-center">
-                        <iconify-icon icon="solar:check-circle-linear" class="text-luxota-accent"></iconify-icon>
-                      </div>
-                      Interface Fluida
-                    </li>
-                  </ul>
-                </div>
-                <div class="w-7/12 absolute right-0 top-0 bottom-0 flex items-center justify-center overflow-hidden">
-                   <img src="/images/card-responsive.png" alt="Responsividade" class="w-full h-full object-contain scale-110 translate-x-12 rotate-3 hover:rotate-0 transition-transform duration-700" />
                 </div>
               </div>
             </div>
@@ -894,69 +1213,67 @@ export default function HomePage() {
             <span class="text-luxota-accent italic font-serif">Funcionário 24h</span> por dia.
           </h2>
 
-          <div class="spotlight-card rounded-3xl p-8 border border-white/10 bg-[#08080A] flex flex-col gap-6">
-            <div class="flex items-center justify-between">
-              <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-luxota-accent text-xl">
-                <iconify-icon icon="solar:pen-bold"></iconify-icon>
-              </div>
-              <img src="/images/card-design.png" alt="Design" class="w-20 h-20 object-contain" />
+          <div class="spotlight-card rounded-3xl p-8 border border-white/10 bg-[#161B27]">
+            <div
+              class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-6 text-luxota-accent text-xl"
+            >
+              <iconify-icon icon="solar:pen-bold"></iconify-icon>
             </div>
-            <div>
-              <h3 class="text-2xl text-white font-medium mb-2 font-display">Design Exclusivo e Premium</h3>
-              <p class="text-sm text-luxota-dim font-light">Feito sob medida para transparecer todo o valor e profissionalismo da sua marca.</p>
-            </div>
+            <h3 class="text-2xl text-white font-medium mb-2 font-display">
+              Design Exclusivo e Premium
+            </h3>
+            <p class="text-sm text-luxota-dim font-light">
+              Feito sob medida para transparecer todo o valor e profissionalismo da sua marca.
+            </p>
           </div>
-
-          <div class="spotlight-card rounded-3xl p-8 border border-white/10 bg-[#08080A] flex flex-col gap-6">
-            <div class="flex items-center justify-between">
-              <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-luxota-accent text-xl">
-                <iconify-icon icon="solar:document-text-bold"></iconify-icon>
-              </div>
-              <img src="/images/card-copy.png" alt="Copy" class="w-20 h-20 object-contain" />
+          <div class="spotlight-card rounded-3xl p-8 border border-white/10 bg-[#161B27]">
+            <div
+              class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-6 text-luxota-accent text-xl"
+            >
+              <iconify-icon icon="solar:document-text-bold"></iconify-icon>
             </div>
-            <div>
-              <h3 class="text-2xl text-white font-medium mb-2 font-display">Copywriting Persuasivo</h3>
-              <p class="text-sm text-luxota-dim font-light">Textos que conduzem o visitante direto para a decisão de compra.</p>
-            </div>
+            <h3 class="text-2xl text-white font-medium mb-2 font-display">
+              Copywriting Persuasivo
+            </h3>
+            <p class="text-sm text-luxota-dim font-light">
+              Textos que não apenas enfeitam, mas conduzem o visitante direto para a decisão de
+              compra.
+            </p>
           </div>
-
-          <div class="spotlight-card rounded-3xl p-8 border border-white/10 bg-[#08080A] flex flex-col gap-6">
-            <div class="flex items-center justify-between">
-              <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-luxota-accent text-xl">
-                <iconify-icon icon="solar:magnifer-bold"></iconify-icon>
-              </div>
-              <img src="/images/card-seo.png" alt="SEO" class="w-20 h-20 object-contain" />
+          <div class="spotlight-card rounded-3xl p-8 border border-white/10 bg-[#161B27]">
+            <div
+              class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-6 text-luxota-accent text-xl"
+            >
+              <iconify-icon icon="solar:magnifer-bold"></iconify-icon>
             </div>
-            <div>
-              <h3 class="text-2xl text-white font-medium mb-2 font-display">SEO & Visibilidade</h3>
-              <p class="text-sm text-luxota-dim font-light">Estratégia para dominar o Google e ser encontrado organicamente.</p>
-            </div>
+            <h3 class="text-2xl text-white font-medium mb-2 font-display">SEO Otimizado</h3>
+            <p class="text-sm text-luxota-dim font-light">
+              Arquitetura feita para o Google amar, fazendo clientes encontrarem você organicamente.
+            </p>
           </div>
-
-          <div class="spotlight-card rounded-3xl p-8 border border-white/10 bg-[#08080A] flex flex-col gap-6">
-            <div class="flex items-center justify-between">
-              <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-luxota-accent text-xl">
-                <iconify-icon icon="solar:rocket-bold"></iconify-icon>
-              </div>
-              <img src="/images/card-speed.png" alt="Speed" class="w-20 h-20 object-contain" />
+          <div class="spotlight-card rounded-3xl p-8 border border-white/10 bg-[#161B27]">
+            <div
+              class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-6 text-luxota-accent text-xl"
+            >
+              <iconify-icon icon="solar:rocket-bold"></iconify-icon>
             </div>
-            <div>
-              <h3 class="text-2xl text-white font-medium mb-2 font-display">Velocidade Extrema</h3>
-              <p class="text-sm text-luxota-dim font-light">Otimização técnica para carregamento instantâneo.</p>
-            </div>
+            <h3 class="text-2xl text-white font-medium mb-2 font-display">Velocidade Extrema</h3>
+            <p class="text-sm text-luxota-dim font-light">
+              Otimização técnica rigorosa porque sites lentos perdem clientes velozes.
+            </p>
           </div>
-
-          <div class="spotlight-card rounded-3xl p-8 border border-white/10 bg-[#08080A] flex flex-col gap-6">
-            <div class="flex items-center justify-between">
-              <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-luxota-accent text-xl">
-                <iconify-icon icon="solar:smartphone-bold"></iconify-icon>
-              </div>
-              <img src="/images/card-responsive.png" alt="Responsive" class="w-20 h-20 object-contain" />
+          <div class="spotlight-card rounded-3xl p-8 border border-white/10 bg-[#161B27]">
+            <div
+              class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-6 text-luxota-accent text-xl"
+            >
+              <iconify-icon icon="solar:smartphone-bold"></iconify-icon>
             </div>
-            <div>
-              <h3 class="text-2xl text-white font-medium mb-2 font-display">Responsividade Total</h3>
-              <p class="text-sm text-luxota-dim font-light">Experiência impecável em celulares, tablets e desktops.</p>
-            </div>
+            <h3 class="text-2xl text-white font-medium mb-2 font-display">
+              Responsividade Perfeita
+            </h3>
+            <p class="text-sm text-luxota-dim font-light">
+              Experiência impecável seja no celular, no tablet ou na maior tela de computador.
+            </p>
           </div>
         </section>
       </div>
@@ -1155,7 +1472,7 @@ export default function HomePage() {
             >
               <div class="aspect-[4/3] relative overflow-hidden">
                 <img
-                  src="/images/portfolio_fiel_mockup_1772762815226.png"
+                  src="file:///C:/Users/hanie/.gemini/antigravity/brain/49de37f5-f6e1-4399-a3c8-8bff34668785/portfolio_fiel_mockup_1772762815226.png"
                   alt="Fiel Alimentos Mockup"
                   class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
                 />
@@ -1189,7 +1506,7 @@ export default function HomePage() {
             >
               <div class="aspect-[4/3] relative overflow-hidden">
                 <img
-                  src="/images/portfolio_emcorr_mockup_1772762854554.png"
+                  src="file:///C:/Users/hanie/.gemini/antigravity/brain/49de37f5-f6e1-4399-a3c8-8bff34668785/portfolio_emcorr_mockup_1772762854554.png"
                   alt="EmCorr Mockup"
                   class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
                 />
@@ -1222,7 +1539,7 @@ export default function HomePage() {
             >
               <div class="aspect-[4/3] relative overflow-hidden">
                 <img
-                  src="/images/portfolio_pinheiro_mockup_1772762886028.png"
+                  src="file:///C:/Users/hanie/.gemini/antigravity/brain/49de37f5-f6e1-4399-a3c8-8bff34668785/portfolio_pinheiro_mockup_1772762886028.png"
                   alt="Clínica Pinheiro Mockup"
                   class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
                 />
@@ -1717,41 +2034,437 @@ export default function HomePage() {
           <div>© 2026 Sites Especiais. Todos os direitos reservados.</div>
         </div>
       </div>
-    </footer>`,
-        }}
-      />
-      <Script
-        id="gsap"
-        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
-        strategy="afterInteractive"
-      />
-      <Script
-        id="gsap-st"
-        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
-        strategy="afterInteractive"
-      />
-      <Script
-        id="lenis"
-        src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"
-        strategy="afterInteractive"
-      />
-      <Script
-        id="particles"
-        src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"
-        strategy="afterInteractive"
-      />
-      <Script
-        id="iconify"
-        src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
-        strategy="afterInteractive"
-      />
-      <Script id="home-logic" src="/home-script.js" strategy="afterInteractive" />
-    </>
-  )
-}
+    </footer>
 
-export const metadata: Metadata = {
-  title: 'Sites Especiais — Sites Premium que Transformam Negócios',
-  description:
-    'Sites premium personalizados para empresas que querem ser encontradas, respeitadas e escolhidas. Agência especializada em presença digital de alto impacto.',
-}
+    <script>
+      // Global Popup Logic
+      window.togglePopup = (show) => {
+        const leadPopup = document.getElementById('lead-popup')
+        const popupContainer = document.getElementById('popup-container')
+        if (!leadPopup || !popupContainer) return
+
+        if (show) {
+          leadPopup.classList.remove('pointer-events-none')
+          gsap.to(leadPopup, { opacity: 1, duration: 0.5 })
+          gsap.fromTo(
+            popupContainer,
+            { scale: 0.9, y: 20 },
+            { scale: 1, y: 0, duration: 0.6, ease: 'expo.out' },
+          )
+        } else {
+          leadPopup.classList.add('pointer-events-none')
+          gsap.to(leadPopup, { opacity: 0, duration: 0.4 })
+          gsap.to(popupContainer, { scale: 0.9, y: 20, duration: 0.4, ease: 'expo.in' })
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        gsap.registerPlugin(ScrollTrigger)
+
+        // ... (resto do código Lenis e animações)
+
+        // Smooth Scroll
+        const lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          direction: 'vertical',
+          smooth: true,
+        })
+        lenis.stop()
+
+        lenis.on('scroll', ScrollTrigger.update)
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000)
+        })
+        gsap.ticker.lagSmoothing(0)
+
+        // Preloader animation
+        const loaderBar = document.getElementById('loader-bar')
+        const counterElement = document.getElementById('counter')
+        const preloader = document.getElementById('preloader')
+        const preloaderTl = gsap.timeline({
+          onComplete: () => {
+            lenis.start()
+          },
+        })
+
+        preloaderTl
+          .to(loaderBar, { scaleX: 1, duration: 1.5, ease: 'power2.inOut' })
+          .to(
+            counterElement,
+            { innerText: 100, duration: 1.5, snap: { innerText: 1 }, ease: 'power2.inOut' },
+            '<',
+          )
+          .to(preloader, {
+            yPercent: -100,
+            duration: 1,
+            ease: 'power4.inOut',
+            delay: 0.2,
+            onComplete: () => {
+              preloader.style.display = 'none'
+            },
+          })
+          .fromTo(
+            '.reveal-nav',
+            { y: -20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
+            '-=0.5',
+          )
+          .to(
+            '.reveal-text',
+            { y: '0%', duration: 1.2, stagger: 0.05, ease: 'power4.out' },
+            '-=0.8',
+          )
+          .to(
+            '.reveal-hero-fade',
+            { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: 'power3.out' },
+            '-=0.8',
+          )
+
+        // Custom Cursor
+        const cursorDot = document.querySelector('.cursor-dot')
+        const cursorOutline = document.querySelector('.cursor-outline')
+        const cursorText = document.querySelector('.cursor-text')
+        const cards = document.querySelectorAll('.spotlight-card')
+
+        gsap.set(cursorDot, { xPercent: -50, yPercent: -50 })
+        gsap.set(cursorOutline, { xPercent: -50, yPercent: -50 })
+
+        window.addEventListener('mousemove', (e) => {
+          const mouseX = e.clientX
+          const mouseY = e.clientY
+
+          gsap.set(cursorDot, { x: mouseX, y: mouseY })
+          gsap.to(cursorOutline, { x: mouseX, y: mouseY, duration: 0.15, ease: 'power2.out' })
+
+          cards.forEach((card) => {
+            const rect = card.getBoundingClientRect()
+            card.style.setProperty('--mouse-x', `${mouseX - rect.left}px`)
+            card.style.setProperty('--mouse-y', `${mouseY - rect.top}px`)
+          })
+        })
+
+        const archCards = document.querySelectorAll('#cards-track .spotlight-card')
+        archCards.forEach((card) => {
+          card.addEventListener('mouseenter', () => {
+            gsap.to(cursorOutline, {
+              width: 110,
+              height: 110,
+              backgroundColor: '#4FD1C5',
+              boxShadow: '0 0 30px #4FD1C5',
+              borderColor: 'transparent',
+              duration: 0.4,
+              ease: 'power3.out',
+            })
+            gsap.to(cursorDot, { opacity: 0, duration: 0.2 })
+            gsap.to(cursorText, {
+              opacity: 1,
+              scale: 1,
+              duration: 0.3,
+              delay: 0.1,
+              color: '#0b0e14',
+            })
+          })
+
+          card.addEventListener('mouseleave', () => {
+            gsap.to(cursorOutline, {
+              width: 40,
+              height: 40,
+              backgroundColor: 'transparent',
+              boxShadow: 'none',
+              borderColor: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(2px)',
+              duration: 0.4,
+              ease: 'power3.out',
+            })
+            gsap.to(cursorDot, { opacity: 1, duration: 0.2 })
+            gsap.to(cursorText, { opacity: 0, scale: 0.5, duration: 0.2 })
+          })
+        })
+
+        // GSAP MatchMedia for Responsiveness
+        let mm = gsap.matchMedia()
+
+        // NARRATIVE (Amplify) - All screens but different behavior
+        const narrativeSection = document.getElementById('amplify')
+        const words = gsap.utils.toArray('.highlight-word')
+        const stat = document.getElementById('amplify-stat')
+
+        if (narrativeSection && words.length > 0) {
+          mm.add('(min-width: 768px)', () => {
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: narrativeSection,
+                start: 'top top',
+                end: '+=150%',
+                pin: true,
+                scrub: 0.5,
+              },
+            })
+
+            tl.fromTo(
+              words,
+              { opacity: 0.1, filter: 'blur(8px)', y: 20 },
+              {
+                opacity: 1,
+                filter: 'blur(0px)',
+                y: 0,
+                stagger: 0.1,
+                duration: 1,
+                ease: 'power2.out',
+              },
+            )
+
+            if (stat) {
+              gsap.to(stat, {
+                scrollTrigger: {
+                  trigger: narrativeSection,
+                  start: 'center center',
+                  end: '+=50%',
+                  scrub: 1,
+                },
+                opacity: 1,
+                y: 0,
+              })
+            }
+          })
+
+          mm.add('(max-width: 767px)', () => {
+            // Mobile: Simpler fade per word or group without pinning
+            gsap.fromTo(
+              words,
+              { opacity: 0.1, filter: 'blur(4px)', y: 10 },
+              {
+                scrollTrigger: {
+                  trigger: narrativeSection,
+                  start: 'top 80%',
+                  end: 'bottom 20%',
+                  scrub: 0.5,
+                },
+                opacity: 1,
+                filter: 'blur(0px)',
+                y: 0,
+                stagger: 0.05,
+              },
+            )
+
+            if (stat) {
+              gsap.to(stat, {
+                scrollTrigger: {
+                  trigger: stat,
+                  start: 'top 90%',
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1,
+              })
+            }
+          })
+        }
+
+        // Horizontal scroll for Architecture/Solucao
+        const track = document.getElementById('cards-track')
+        const pinSection = document.getElementById('architecture-pin')
+
+        mm.add('(min-width: 1024px)', () => {
+          if (track && pinSection) {
+            gsap.to(track, {
+              x: () => -(track.scrollWidth - window.innerWidth + 100),
+              ease: 'none',
+              scrollTrigger: {
+                trigger: pinSection,
+                start: 'top top',
+                end: () => `+=${track.scrollWidth}`,
+                pin: true,
+                scrub: 1,
+                invalidateOnRefresh: true,
+              },
+            })
+          }
+
+          // Maturity bar (Process section)
+          const maturityBar = document.getElementById('maturity-bar')
+          if (maturityBar) {
+            gsap.to(maturityBar, {
+              height: '100%',
+              ease: 'none',
+              scrollTrigger: {
+                trigger: '#como-funciona',
+                start: 'top center',
+                end: 'bottom center',
+                scrub: true,
+              },
+            })
+          }
+        })
+
+        mm.add('(max-width: 1023px)', () => {
+          // Mobile Solucao: Vertical stack is fine, just fade them in
+          const archCards = document.querySelectorAll('#cards-track .spotlight-card')
+          archCards.forEach((card) => {
+            gsap.fromTo(
+              card,
+              { y: 30, opacity: 0 },
+              {
+                scrollTrigger: { trigger: card, start: 'top 90%' },
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+              },
+            )
+          })
+        })
+
+        // Particles
+        if (document.getElementById('particles-js')) {
+          particlesJS('particles-js', {
+            particles: {
+              number: { value: 80, density: { enable: true, value_area: 800 } },
+              color: { value: '#ffffff' },
+              shape: { type: 'circle' },
+              opacity: { value: 0.2, random: false },
+              size: { value: 3, random: true },
+              line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#ffffff',
+                opacity: 0.1,
+                width: 1,
+              },
+              move: {
+                enable: true,
+                speed: 0.5,
+                direction: 'none',
+                random: false,
+                straight: false,
+                out_mode: 'out',
+                bounce: false,
+              },
+            },
+            interactivity: {
+              detect_on: 'window',
+              events: {
+                onhover: { enable: true, mode: 'grab' },
+                onclick: { enable: true, mode: 'push' },
+                resize: true,
+              },
+              modes: {
+                grab: { distance: 200, line_linked: { opacity: 0.3 } },
+                push: { particles_nb: 4 },
+              },
+            },
+            retina_detect: true,
+          })
+        }
+
+        // FAQ Logic
+        const faqItems = document.querySelectorAll('.faq-item')
+        faqItems.forEach((item) => {
+          const button = item.querySelector('button')
+          const content = item.querySelector('.faq-content')
+          const icon = item.querySelector('.faq-icon')
+          button.addEventListener('click', () => {
+            const isOpen = item.classList.contains('active')
+            faqItems.forEach((otherItem) => {
+              const otherContent = otherItem.querySelector('.faq-content')
+              const otherIcon = otherItem.querySelector('.faq-icon')
+              if (otherContent) gsap.to(otherContent, { height: 0, opacity: 0, duration: 0.3 })
+              if (otherIcon) gsap.to(otherIcon, { rotation: 0, duration: 0.3 })
+              otherItem.classList.remove('active')
+            })
+            if (!isOpen) {
+              gsap.to(content, { height: 'auto', opacity: 1, duration: 0.4 })
+              gsap.to(icon, { rotation: 180, duration: 0.3 })
+              item.classList.add('active')
+            }
+          })
+        })
+
+        // Scroll Animations for elements coming into view
+        document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+          gsap.fromTo(
+            el,
+            { y: 40, opacity: 0 },
+            {
+              scrollTrigger: {
+                trigger: el,
+                start: 'top 85%',
+              },
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: 'power3.out',
+            },
+          )
+        })
+
+        // Connect all CTA buttons to popup
+        document.addEventListener('click', (e) => {
+          const target = e.target.closest('a, button')
+          if (!target) return
+
+          const isWhatsApp =
+            target.tagName === 'A' && target.href && target.href.indexOf('wa.me') > -1
+          const isTrigger = target.classList.contains('open-popup-trigger')
+          const isAgendar =
+            (target.textContent && target.textContent.includes('Agendar')) ||
+            (target.innerText && target.innerText.includes('Agendar'))
+
+          if (isWhatsApp || isTrigger || isAgendar) {
+            e.preventDefault()
+            window.togglePopup(true)
+          }
+        })
+
+        const leadForm = document.getElementById('lead-form')
+        document
+          .querySelector('.close-popup')
+          ?.addEventListener('click', () => window.togglePopup(false))
+        document
+          .querySelector('.popup-overlay')
+          ?.addEventListener('click', () => window.togglePopup(false))
+
+        // WhatsApp Mask
+        const whatsappInput = document.getElementById('whatsapp-input')
+        whatsappInput?.addEventListener('input', (e) => {
+          let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/)
+          e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '')
+        })
+
+        // Form Submission
+        leadForm?.addEventListener('submit', async (e) => {
+          e.preventDefault()
+          const btn = leadForm.querySelector('button[type="submit"]')
+          const btnText = btn.querySelector('span')
+          const originalText = btnText.innerHTML
+
+          btn.disabled = true
+          btnText.innerHTML = 'Enviando...'
+
+          const formData = new FormData(leadForm)
+          const data = Object.fromEntries(formData.entries())
+
+          try {
+            await fetch('https://formspree.io/f/rvstecnologia@gmail.com', {
+              method: 'POST',
+              body: JSON.stringify(data),
+              headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+            })
+          } catch (err) {
+            console.warn('Email fail')
+          }
+
+          const message = `*Novo Diagnóstico Solicitado*\n*Nome:* ${data.name}\n*Empresa:* ${data.company}\n*Cidade:* ${data.city}\n*Já possui site:* ${data.has_site}\n*WhatsApp:* ${data.whatsapp}\n*E-mail:* ${data.email}`
+
+          const whatsappUrl = `https://wa.me/5589994315927?text=${encodeURIComponent(message)}`
+          window.open(whatsappUrl, '_blank')
+
+          btn.disabled = false
+          btnText.innerHTML = originalText
+          leadForm.reset()
+          window.togglePopup(false)
+        })
+      })
+    </script>
+  </body>
+</html>
